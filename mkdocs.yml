@@ -1,0 +1,69 @@
+site_name: BPM Rods
+site_description: Bonded-particle model for magneto-elastic rods
+site_url: https://gsalkuin.github.io
+repo_url: https://github.com/gsalkuin/lammps-bpm-rods
+repo_name: lammps-bpm-rods
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
+  features:
+    - navigation.instant
+    - navigation.expand
+    - navigation.path
+    - content.code.copy
+    - toc.integrate
+
+markdown_extensions:
+  - attr_list
+  - footnotes
+  - tables
+  - admonition
+  - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/download.js
+
+extra_css:
+  - stylesheets/custom.css
+
+nav:
+  - Home: index.md
+  - Examples:
+      - Cantilever Beams: examples/cantilever-beam/index.md
+      - Plectonemes: examples/twisting-rod/index.md
+      - Magnetic Beams: examples/magnetic-beam/index.md
+      - Magnetic Helical Rods: examples/helical-rod/index.md
+      - "FSI: Oscillatory Flow": examples/fsi-oscillatory-flow/index.md
+      - "FSI: Magnetic Cilia": examples/fsi-cilia-array/index.md
+  - Miscellaneous:
+      - Unit Systems: misc/unit-system.md

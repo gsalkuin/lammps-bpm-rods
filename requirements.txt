@@ -1,0 +1,3 @@
+mkdocs-material
+pygments-lammps
+mkdocs-git-revision-date-localized-plugin
