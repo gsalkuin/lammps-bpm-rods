@@ -1,5 +1,5 @@
 site_name: BPM Rods
-site_description: Bonded-particle model for magneto-elastic rods
+site_dir: site
 site_url: https://gsalkuin.github.io
 repo_url: https://github.com/gsalkuin/lammps-bpm-rods
 repo_name: lammps-bpm-rods
