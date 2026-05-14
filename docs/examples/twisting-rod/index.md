@@ -55,7 +55,6 @@ The straight rod does not need this wall because its plectoneme forms farther fr
 - **Units**: `units lj` with *milli* units (see [Unit System](../../misc/unit-system.md))
 - **Atom style**: `atom_style hybrid bpm/sphere dipole` — a "dipole" is assigned to each atom to visualize the twist. 
                    Note that the dipole vector does not capture the full 3D rotation.
-- **Bond style**: `bond_style bpm/rotational` with `smooth no`, `break no`
 - **Contact**: `pair_style granular` with Hertz–Mindlin; atom diameter set to $\approx 3 \ell_0$ for smooth contact surface; `special_bonds lj 0 0 0` disables pair forces for bonded neighbors up to 3 bonds away. This is necessary because the atom diameter causes bonded neighbors to overlap.
 - **Time integration**: `fix nve/bpm/sphere update dipole`
 - **Damping**: `fix langevin` for quasi-static equilibration

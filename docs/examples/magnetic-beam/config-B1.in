@@ -1,0 +1,141 @@
+# =========================================================================
+# Magnetized beam — Config B1
+# Beam magnetized in +y, constant-gradient field (dB_yy > 0)
+# =========================================================================
+
+variable    N       equal 258
+
+# Beam geometry
+variable    L       equal 25.8
+variable    W       equal 1.21
+variable    H       equal 0.49
+variable    d0      equal $(v_L/v_N)
+
+# Rectangular cross-section
+variable    A       equal v_W*v_H
+variable    I       equal v_W*v_H^3/12
+variable    J       equal v_W*v_H/12*(v_W^2+v_H^2)
+
+# Material properties
+variable    E       equal 1.16e3
+variable    nu      equal 0.49
+variable    G       equal "v_E/(2*(1+v_nu))"
+
+# Magnetization
+variable    M       equal 0.941
+variable    mu      equal v_M*v_d0*v_W*v_H
+
+# =========================================================================
+# Initialization
+# =========================================================================
+
+units           lj     # milli units
+dimension       2
+boundary        f f p
+processors      * 1 1
+
+atom_style      hybrid bpm/sphere dipole
+special_bonds   lj 0.0 1.0 1.0 coul 1.0 1.0 1.0
+newton          on off
+
+neighbor        $(v_d0) bin
+neigh_modify    delay 0 every 10000
+atom_modify     sort 10000 1
+comm_modify     mode single cutoff $(2*v_d0) vel yes
+
+read_data       magnetic-beam-N${N}.lam
+
+# Set dipole in +y direction
+set             group all dipole 0 ${mu} 0
+
+# =========================================================================
+# Groups
+# =========================================================================
+
+region          left block INF $(v_d0/2) INF INF INF INF
+region          right block $(v_L-v_d0/2) INF INF INF INF INF
+group           left region left
+group           right region right
+group           free subtract all left
+
+# =========================================================================
+# BPM bond style
+# =========================================================================
+
+variable        Kr equal v_E*v_A/v_d0
+variable        Ks equal 12*v_E*v_I/v_d0^3
+variable        Kt equal v_G*v_J/v_d0
+variable        Kb equal v_E*v_I/v_d0
+
+bond_style      bpm/rotational smooth no break no
+bond_coeff      1 ${Kr} ${Ks} ${Kt} ${Kb} &
+                -1 -1 -1 -1 &
+                0.01 0.01 0.01 0.01
+
+pair_style      zero $(2*v_d0)
+pair_coeff      * * $(2*v_d0)
+
+# =========================================================================
+# Computes and output
+# =========================================================================
+
+timestep        5e-4
+
+compute         delx right reduce ave x
+compute         dely right reduce ave y
+
+variable        dx equal "c_delx/v_L-1"
+variable        dy equal "c_dely/v_L"
+
+variable        l equal 0
+variable        dB equal 0
+variable        dBone equal v_E*v_I/(v_M*v_A*v_L^3)*0.36
+
+thermo          10000
+thermo_style    custom step temp ke pe etotal v_l v_dx v_dy
+thermo_modify   lost ignore flush yes norm no
+
+dump            1 all custom 100000 ./config-B1.dump id type x y fx fy mux muy
+
+fix             prnt all print 100000 &
+                "${l} ${dx} ${dy}" &
+                file config-B1.txt screen no
+
+reset_timestep  0
+
+# =========================================================================
+# Loop: constant-gradient field increments (lambda_m^C = 1 to 45)
+# =========================================================================
+
+variable        i loop 45
+
+label           LOOP1
+
+variable        dB equal "v_dBone*v_i"
+variable        l equal "v_i"
+
+bond_coeff      1 ${Kr} ${Ks} ${Kt} ${Kb} &
+                -1 -1 -1 -1 &
+                0.01 0.01 0.01 0.01
+
+fix             1 free nve/bpm/sphere update dipole
+fix             2 free langevin 0 0 10000 83715463 zero yes omega yes
+fix             3 all efield/lepton "-v_dB*(-x^2+2*y^2)/4" step 1
+fix             4 all enforce2d
+fix_modify      3 energy yes
+
+run             100000
+
+velocity        all zero linear
+velocity        all zero angular
+
+bond_coeff      1 ${Kr} ${Ks} ${Kt} ${Kb} &
+                -1 -1 -1 -1 &
+                0.05 0.05 0.05 0.05
+
+fix             2 free langevin 0 0 10 83715463 zero yes omega yes
+
+run             900000
+
+next            i
+jump            SELF LOOP1
