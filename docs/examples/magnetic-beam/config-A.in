@@ -100,8 +100,6 @@ fix             prnt all print 100000 &
                 "${l} ${dx} ${dy}" &
                 file config-A.txt screen no
 
-reset_timestep  0
-
 # =========================================================================
 # Loop 1: small field increments (lambda_m^C = 0.5 to 5)
 # =========================================================================

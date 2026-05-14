@@ -101,8 +101,6 @@ fix             prnt all print 100000 &
                 "${l} ${dx} ${dy}" &
                 file config-B1.txt screen no
 
-reset_timestep  0
-
 # =========================================================================
 # Loop: constant-gradient field increments (lambda_m^C = 1 to 45)
 # =========================================================================

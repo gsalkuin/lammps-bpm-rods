@@ -113,7 +113,7 @@ All examples are self-contained; the simplest is [Demo: Cantilever Beams](exampl
 <div class="desc">Straight and curved rods under extreme twisting with self-contact</div>
 </a>
 <a href="examples/magnetic-beam/" class="example-card">
-<div class="title">Magnetic Beams (under construction)</div>
+<div class="title">Magnetic Beams</div>
 <div class="desc">Magnetized beams in uniform and constant-gradient magnetic fields</div>
 </a>
 <a href="examples/helical-rod/" class="example-card">
