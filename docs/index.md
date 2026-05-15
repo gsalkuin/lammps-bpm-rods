@@ -117,7 +117,7 @@ All examples are self-contained; the simplest is [Demo: Cantilever Beams](exampl
 <div class="desc">Magnetized beams in uniform and constant-gradient magnetic fields</div>
 </a>
 <a href="examples/helical-rod/" class="example-card">
-<div class="title">Magnetic Helical Rods (under construction)</div>
+<div class="title">Magnetic Helical Rods</div>
 <div class="desc">Magnetized helical rods with dipole–dipole interactions and mechanical hysteresis</div>
 </a>
 <a href="examples/fsi-oscillatory-flow/" class="example-card">

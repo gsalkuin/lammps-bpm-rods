@@ -1,0 +1,166 @@
+# =========================================================================
+# Magnetic loading of a helical rod
+# Helix magnetized along +z, axial gradient field
+# 
+# Replace GAMMA with the desired value before running.
+# =========================================================================
+
+variable    gamma    equal GAMMA
+variable    gammastr string GAMMA
+
+# Helix geometry
+variable    L       equal 10.3
+variable    N       equal 103
+variable    l0      equal $(v_L/v_N)
+variable    d       equal 0.2
+
+# Cross-section properties
+variable    A       equal (PI/4)*v_d^2
+variable    I       equal (PI/64)*v_d^4
+variable    J       equal (PI/32)*v_d^4
+
+# Elastic moduli
+variable    E       equal 1.16e7
+variable    nu      equal 0.5
+variable    G       equal "v_E/(2*(1+v_nu))"
+
+# Field prefactor: b = bprefactor * lambda_m^3
+variable    mu0         equal 4*PI
+variable    bprefactor  equal $(sqrt(v_mu0/(v_gamma*v_E))*v_E*v_I/(v_A*v_L^3))
+
+# =========================================================================
+# Initialization
+# =========================================================================
+
+units           cgs
+dimension       3
+boundary        f f f
+processors      * * 1
+
+atom_style      hybrid bpm/sphere dipole
+special_bonds   lj 0.0 1.0 1.0 coul 0.0 1.0 1.0
+newton          on off
+
+neighbor        0.1 bin
+neigh_modify    delay 0 every 10000
+atom_modify     sort 10000 1
+comm_modify     mode single cutoff 1.0 vel yes
+
+read_data       helix-N${N}.lam
+
+change_box      all x scale 3 y scale 3 z final $(-0.8*v_L) $(0.1*v_L)
+
+# =========================================================================
+# Groups
+# =========================================================================
+
+group           fixed id $(v_N+1)
+group           free subtract all fixed
+
+# =========================================================================
+# BPM bond style
+# =========================================================================
+
+variable        Kr equal v_E*v_A/v_l0
+variable        Ks equal 12*v_E*v_I/v_l0^3
+variable        Kt equal v_G*v_J/v_l0
+variable        Kb equal v_E*v_I/v_l0
+
+bond_style      bpm/rotational smooth no break no
+bond_coeff      1 ${Kr} ${Ks} ${Kt} ${Kb} &
+                -1 -1 -1 -1 &
+                0.1 0.1 0.1 0.1
+
+# =========================================================================
+# Dipole-dipole interactions and contact
+# =========================================================================
+
+variable        mu equal sqrt(${gamma}*v_E/v_mu0)*v_A*v_l0
+
+set             group all dipole 0 0 ${mu}
+
+pair_style      hybrid/overlay gran/hertz/history $(10*v_E) NULL 0.5 NULL 0.1 1 &
+                lj/cut/dipole/cut 0.0 1.0
+pair_coeff      * * gran/hertz/history
+pair_coeff      * * lj/cut/dipole/cut 0.0 0.0
+
+# =========================================================================
+# Computes and output
+# =========================================================================
+
+timestep        1e-7
+
+compute         zmax all reduce max z
+compute         zmin all reduce min z
+variable        dz equal "(c_zmax-c_zmin)/v_L"
+
+variable        l equal 0
+variable        b equal v_bprefactor*v_l^3
+
+thermo          10000
+thermo_style    custom step temp ke pe etotal v_l v_dz
+thermo_modify   lost ignore flush yes norm no
+
+dump            1 all custom 100000 ./deform-helix-g${gammastr}.dump &
+                id type x y z mux muy muz
+
+fix             prnt all print 100000 &
+                "${l} ${dz}" &
+                file deform-helix-g${gammastr}.txt screen no &
+                title "lambda_m z/L"
+
+run             0
+
+# =========================================================================
+# Loop 1: loading (lambda_m = 0 to 3.5)
+# =========================================================================
+
+variable        i loop 36
+
+label           LOOP_UP
+
+variable        l equal "(v_i-1)/10"
+
+fix             1 free nve/bpm/sphere update dipole
+fix             2 free langevin 0 0 1 83715463 zero yes omega yes
+fix             3 all efield/lepton "-v_b*((x^2+y^2)/4-z^2/2);" step 1
+fix_modify      3 energy yes
+
+run             10000000
+
+velocity        all zero linear
+velocity        all zero angular
+
+fix             2 free langevin 0 0 1e-1 83715463 zero yes omega yes
+
+run             10000000
+
+next            i
+jump            SELF LOOP_UP
+
+# =========================================================================
+# Loop 2: unloading (lambda_m = 3.4 to 0)
+# =========================================================================
+
+variable        i loop 35
+
+label           LOOP_DOWN
+
+variable        l equal "(35-v_i)/10"
+
+fix             1 free nve/bpm/sphere update dipole
+fix             2 free langevin 0 0 1 83715463 zero yes omega yes
+fix             3 all efield/lepton "-v_b*((x^2+y^2)/4-z^2/2);" step 1
+fix_modify      3 energy yes
+
+run             10000000
+
+velocity        all zero linear
+velocity        all zero angular
+
+fix             2 free langevin 0 0 1e-1 83715463 zero yes omega yes
+
+run             10000000
+
+next            i
+jump            SELF LOOP_DOWN

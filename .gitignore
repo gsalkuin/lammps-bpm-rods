@@ -2,7 +2,7 @@
 #docs/examples/cantilever-beam/*
 #docs/examples/twisting-rod/*
 #docs/examples/magnetic-beam/*
-docs/examples/helical-rod/*
+#docs/examples/helical-rod/*
 docs/examples/fsi-oscillatory-flow/*
 docs/examples/fsi-cilia-array/*
 
