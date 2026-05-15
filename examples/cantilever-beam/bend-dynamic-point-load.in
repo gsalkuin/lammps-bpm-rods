@@ -1,7 +1,7 @@
 # =========================================================================
 # Cantilever beam under sinusoidal point load on free end
 # 
-# Run: lmp -var NBONDS <INPUT> -in bend-dynamic-point-load.in
+# Replace NBONDS with the desired value before running.
 # =========================================================================
 
 variable    N       equal NBONDS

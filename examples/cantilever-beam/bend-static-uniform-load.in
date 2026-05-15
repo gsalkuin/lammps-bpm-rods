@@ -1,7 +1,7 @@
 # =========================================================================
 # Cantilever beam under static uniform load
 # 
-# Run: lmp -var NBONDS <INPUT> -in bend-static-uniform-load.in
+# Replace NBONDS with the desired value before running.
 # =========================================================================
 
 variable    N       equal NBONDS

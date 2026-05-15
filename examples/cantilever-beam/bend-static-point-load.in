@@ -1,7 +1,7 @@
 # =========================================================================
 # Cantilever beam under static point load on free end
 # 
-# Run: lmp -var NBONDS <INPUT> -in bend-static-point-load.in
+# Replace NBONDS with the desired value before running.
 # =========================================================================
 
 variable    N       equal NBONDS
