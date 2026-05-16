@@ -9,9 +9,9 @@ H = 0.49
 density = 2.01  # mg/mm^3
 
 # Discretization
-d0 = L / N
-diam = d0  # arbitrary
-mass = density * d0 * W * H
+l0 = L / N
+diam = l0  # arbitrary
+mass = density * l0 * W * H
 dens = mass / (np.pi / 6 * diam**3)
 
 # atom_style hybrid bpm/sphere dipole
@@ -33,7 +33,7 @@ with open('magnetic-beam-N{}.lam'.format(int(N)), 'w') as file:
     for k in range(N+1):
         # atom-id type x y z molid diameter density q mux muy muz
         file.write('%i 1 %f 0 0 1 %f %f 0 0 0 0 \n' % (k+1, x, diam, dens))
-        x += d0
+        x += l0
     file.write('\n')
 
     file.write('Bonds \n\n')
