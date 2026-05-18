@@ -25,7 +25,7 @@ Flexible rods undergoing large deformations are ubiquitous in science and engine
 
 ## Citation
 
-This page provides the implementation details and code for the work described in:
+This page provides additional details and simulation scripts for the examples in:
 
 Alkuino, G., Clemmer, J. T., Santangelo, C. D., & Zhang, T. (2026). Bonded-particle model for magneto-elastic rods. [arXiv:2603.27279](https://arxiv.org/abs/2603.27279).
 
