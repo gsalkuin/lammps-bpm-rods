@@ -124,7 +124,7 @@ All examples are self-contained; the simplest is [Demo: Cantilever Beams](exampl
 <div class="desc">Magnetized helical rods with dipole–dipole interactions and mechanical hysteresis</div>
 </a>
 <a href="examples/fsi-oscillatory-flow/" class="example-card">
-<div class="title">FSI: Oscillatory Flow (under construction)</div>
+<div class="title">FSI: Oscillatory Flow</div>
 <div class="desc">Elastic filaments in oscillatory channel flow</div>
 </a>
 <a href="examples/fsi-cilia-array/" class="example-card">
