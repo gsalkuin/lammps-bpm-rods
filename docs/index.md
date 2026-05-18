@@ -68,6 +68,9 @@ and [`fix nve/bpm/sphere`](https://docs.lammps.org/fix_nve_bpm_sphere.html) for 
 For magnetic examples, the `dipole` sub-style must be added via `atom_style hybrid`.
 The `update dipole` keyword/value pair must be added to `fix nve/bpm/sphere` to use the magnetic model described in this work.
 
+!!! note
+    We use *particle* and *atom* interchangeably.
+
 Bonds can be created using [`create_bonds`](https://docs.lammps.org/create_bonds.html) or defined directly in the [data file](https://docs.lammps.org/read_data.html).
 The bond style and coefficients are specified as:
 
