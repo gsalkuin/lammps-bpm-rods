@@ -1,0 +1,127 @@
+# =========================================================================
+# Oscillatory channel flow with elastic filaments
+# =========================================================================
+
+# Filament parameters (milli units: mm, ms, mg)
+variable    Nb      equal 16
+variable    L       equal 10
+variable    d       equal 1
+variable    l0      equal $(v_L/v_Nb)
+
+# Cross-section properties
+variable    A       equal (PI/4)*v_d^2
+variable    I       equal (PI/64)*v_d^4
+variable    J       equal (PI/32)*v_d^4
+
+# Elastic moduli (kPa)
+variable    E       equal 1230
+variable    G       equal 473
+
+# =========================================================================
+# Initialization
+# =========================================================================
+
+units           lj
+dimension       3
+processors      5 3 3
+
+atom_style      hybrid molecular bpm/sphere
+special_bonds   lj 0.0 1.0 1.0 coul 1.0 1.0 1.0
+newton          on off
+
+boundary        p f p
+neighbor        0.5 bin
+neigh_modify    delay 0 every 1
+comm_modify     mode single cutoff $(2*v_l0) vel yes
+
+read_data       filaments.lam
+
+# =========================================================================
+# Groups
+# =========================================================================
+
+group           bottom type 1
+group           interior type 2
+group           tip type 3
+
+group           free union interior tip
+
+# Track the tip of the rightmost filament
+variable        trackid equal 5*(v_Nb+1)
+group           track id ${trackid}
+
+variable        xt equal x[${trackid}]
+variable        yt equal y[${trackid}]
+variable        zt equal z[${trackid}]
+
+# =========================================================================
+# BPM bond style
+# =========================================================================
+
+variable        Kr equal v_E*v_A/v_l0
+variable        Ks equal 12*v_E*v_I/v_l0^3
+variable        Kt equal v_G*v_J/v_l0
+variable        Kb equal v_E*v_I/v_l0
+
+bond_style      bpm/rotational smooth no break no
+bond_coeff      1 ${Kr} ${Ks} ${Kt} ${Kb} &
+                -1 -1 -1 -1 &
+                0 0 0 0
+
+pair_style      zero $(2*v_l0)
+pair_coeff      * * $(2*v_l0)
+
+# =========================================================================
+# LBM parameters
+# =========================================================================
+
+variable        nuf     equal 0.1
+variable        rhof    equal 1.26
+
+# Oscillating body force: g(t) = g0 sin(2 pi f t)
+variable        freq    equal 1e-3
+variable        g0      equal 3.8e-3
+variable        time    equal step*v_timestep
+variable        cyc     equal v_freq*v_time
+variable        gx_osc  equal v_g0*sin(2*PI*v_cyc)
+
+# =========================================================================
+# Dynamics
+# =========================================================================
+
+variable        timestep equal 0.003968
+timestep        ${timestep}
+
+compute         mytemp all temp/sphere
+compute         kerot all erotate/sphere
+
+# Initial tip position (reference for displacement)
+variable        xt0 equal ${xt}
+variable        yt0 equal ${yt}
+variable        zt0 equal ${zt}
+
+variable        dxt equal v_xt-v_xt0
+variable        dyt equal v_yt-v_yt0
+variable        dzt equal v_zt-v_zt0
+
+thermo          2100
+thermo_style    custom step v_cyc temp ke c_kerot pe v_dxt v_dyt v_dzt
+thermo_modify   temp mytemp norm no
+
+fix             prnt all print 2100 &
+                "${cyc} ${dxt} ${dyt} ${dzt}" &
+                file right-tip.txt screen no &
+                title "cycle dx dy dz"
+
+fix             nve free nve/bpm/sphere
+
+fix             ibm free couplb 160 96 80 ${nuf} ${rhof} &
+                md_per_lb 21 &
+                wall_y 1 1 &
+                gravity v_gx_osc 0 0 &
+                output 6300 fluid.dat &
+                check_every 25200 &
+                vtk 6300 ./vtk/flow &
+                vtk_solid id type mass vx vy vz fx fy fz
+
+run             2520000

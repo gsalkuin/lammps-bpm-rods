@@ -1,0 +1,1340 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://gsalkuin.github.io/examples/fsi-oscillatory-flow/">
+      
+      
+        <link rel="prev" href="../helical-rod/">
+      
+      
+        <link rel="next" href="../../misc/unit-system/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>FSI: Oscillatory Flow - BPM Rods</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#oscillatory-channel-flow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BPM Rods" class="md-header__button md-logo" aria-label="BPM Rods" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BPM Rods
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              FSI: Oscillatory Flow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gsalkuin/lammps-bpm-rods" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lammps-bpm-rods
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BPM Rods" class="md-nav__button md-logo" aria-label="BPM Rods" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BPM Rods
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gsalkuin/lammps-bpm-rods" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lammps-bpm-rods
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cantilever-beam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cantilever Beams
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../twisting-rod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plectonemes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../magnetic-beam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Magnetic Beams
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../helical-rod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Magnetic Helical Rods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    FSI: Oscillatory Flow
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    FSI: Oscillatory Flow
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lattice-boltzmann-and-immersed-boundary-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lattice Boltzmann and Immersed Boundary Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discretization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discretization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-lammps-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key LAMMPS settings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-file-generator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data file generator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lammps-input-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      LAMMPS input script
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsi-cilia-array/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FSI: Magnetic Cilia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Miscellaneous
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Miscellaneous
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../misc/unit-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unit Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="oscillatory-channel-flow">Oscillatory Channel Flow</h1>
+<p><strong>Sec. 4.2</strong> — Based on <a href="https://doi.org/10.1007/s11012-016-0513-0">Pinelli et al. (2017)</a></p>
+<p>Five elastic filaments are immersed in an oscillatory channel flow between no-slip walls.</p>
+<h2 id="lattice-boltzmann-and-immersed-boundary-method">Lattice Boltzmann and Immersed Boundary Method</h2>
+<p>The fluid–structure interaction (FSI) is handled by the <a href="https://github.com/tengzhang48/CoupLB">CoupLB</a> package, a custom, lightweight LBM implementation in LAMMPS.
+Momentum is exchanged between the Lagrangian BPM particles and the Eulerian fluid lattice through an immersed boundary method (IBM).
+A penalty force drives each particle toward the local fluid velocity, and the equal and opposite reaction is spread back onto the fluid grid.</p>
+<p>Because the stiff BPM springs require a smaller timestep than the LBM, multiple LAMMPS steps are performed per LB step.
+This subcycling is controlled by the <code>md_per_lb</code> keyword in <code>fix couplb</code>.
+The fluid velocity is interpolated once at the start of each LBM cycle, and the penalty force is recomputed at every substep using each particle's current velocity.</p>
+<h2 id="parameters">Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filament length <span class="arithmatex">\(L\)</span></td>
+<td>10 mm</td>
+</tr>
+<tr>
+<td>Filament diameter <span class="arithmatex">\(d\)</span></td>
+<td>1 mm</td>
+</tr>
+<tr>
+<td>Young's modulus <span class="arithmatex">\(E\)</span></td>
+<td>1.23 MPa</td>
+</tr>
+<tr>
+<td>Poisson's ratio <span class="arithmatex">\(\nu_s\)</span></td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>Filament density <span class="arithmatex">\(\rho_s\)</span></td>
+<td>0.97 g/cm<span class="arithmatex">\(^3\)</span></td>
+</tr>
+<tr>
+<td>Fluid kinematic viscosity <span class="arithmatex">\(\nu_f\)</span></td>
+<td>0.1 mm<span class="arithmatex">\(^2\)</span>/ms</td>
+</tr>
+<tr>
+<td>Fluid density <span class="arithmatex">\(\rho_f\)</span></td>
+<td>1.26 g/cm<span class="arithmatex">\(^3\)</span></td>
+</tr>
+<tr>
+<td>Peak velocity <span class="arithmatex">\(u_\text{max}\)</span></td>
+<td>0.6 m/s</td>
+</tr>
+<tr>
+<td>Oscillation frequency <span class="arithmatex">\(f\)</span></td>
+<td>1 Hz</td>
+</tr>
+<tr>
+<td>Reynolds number <span class="arithmatex">\(\mathrm{Re}\)</span></td>
+<td>60</td>
+</tr>
+<tr>
+<td>Domain (<span class="arithmatex">\(x \times y \times z\)</span>)</td>
+<td><span class="arithmatex">\(10L \times 6L \times 5L\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="setup">Setup</h2>
+<p>Five straight filaments are clamped to the lower wall (<span class="arithmatex">\(y = 0\)</span>) of the channel and arranged in a row along <span class="arithmatex">\(x\)</span> at intervals of <span class="arithmatex">\(L/2\)</span>, with the middle filament at the center.
+The fluid is driven by a sinusoidal body-force acceleration</p>
+<div class="arithmatex">\[g_x(t) = g_0 \sin(2\pi f\, t),\]</div>
+<p>where the amplitude is <span class="arithmatex">\(g_0 = u_\text{max} \cdot 2\pi f\)</span>, determined from the analytical solution for oscillatory channel flow in the limit where the Stokes layer thickness is much smaller than the half-channel height.
+No-slip walls bound the channel in <span class="arithmatex">\(y\)</span>; the remaining directions are periodic.</p>
+<h3 id="discretization">Discretization</h3>
+<p>The LBM grid has spacing <span class="arithmatex">\(\Delta x_\text{LB} = 0.625\)</span> mm (<span class="arithmatex">\(160 \times 96 \times 80\)</span> nodes).
+The BPM bond length matches the LBM spacing (<span class="arithmatex">\(\mathrm{Gr} = \Delta x_\text{BP}/\Delta x_\text{LB} = 1\)</span>), giving 16 bonds per filament.
+The stiff BPM springs require subcycling at 21 LAMMPS steps per LB step (<code>md_per_lb 21</code>).</p>
+<p>The data file generator includes a callable function <code>lbm_analysis()</code> that documents how the LBM parameters were selected.</p>
+<h3 id="key-lammps-settings">Key LAMMPS settings</h3>
+<ul>
+<li><strong>Units</strong>: <code>units lj</code> using our <a href="../../misc/unit-system/">milli unit system</a></li>
+<li><strong>Atom style</strong>: <code>atom_style hybrid molecular bpm/sphere</code></li>
+<li><strong>Boundary</strong>: <code>p f p</code> — periodic in <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(z\)</span>, fixed in <span class="arithmatex">\(y\)</span> (walls)</li>
+<li><strong>Pair style</strong>: <code>pair_style zero</code> — no contact</li>
+<li><strong>FSI coupling</strong>: <code>fix couplb</code> with <code>wall_y 1 1</code> for no-slip walls and <code>gravity v_gx_osc 0 0</code> for the oscillating body force</li>
+<li><strong>Time integration</strong>: <code>fix nve/bpm/sphere</code></li>
+<li><strong>Damping</strong>: no explicit damping — all dissipation comes from the fluid coupling</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Atom types</p>
+<p>Three atom types are used: type 1 (clamped base), type 2 (interior), and type 3 (tip).
+The base atoms are excluded from the dynamics.</p>
+</div>
+<h2 id="files">Files</h2>
+<h3 id="data-file-generator">Data file generator</h3>
+<p>The generator writes <code>filaments.lam</code> with 5 filaments (<span class="arithmatex">\(\mathrm{Gr} = 1\)</span> by default).
+Run <code>lbm_analysis()</code> to print the full LBM parameter analysis.</p>
+<details class="code-file">
+<summary class="code-file-header">
+  <span class="filename">create_filaments.py</span>
+  <a class="download-btn" href="create_filaments.py" download onclick="event.stopPropagation()">⬇ Download</a>
+</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Gr</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># grid ratio dx_BP/dx_LB</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Physical parameters (milli units: mm, ms, mg)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">L</span> <span class="o">=</span> <span class="mf">10.</span>             <span class="c1"># filament length</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">D</span> <span class="o">=</span> <span class="mf">1.</span>              <span class="c1"># filament diameter</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">rho</span> <span class="o">=</span> <span class="mf">0.97</span>          <span class="c1"># filament density</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">E</span> <span class="o">=</span> <span class="mf">1230.</span>           <span class="c1"># Young&#39;s modulus (kPa)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">nu_s</span> <span class="o">=</span> <span class="mf">0.3</span>          <span class="c1"># Poisson&#39;s ratio</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">G</span> <span class="o">=</span> <span class="n">E</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">nu_s</span><span class="p">))</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">nuf</span> <span class="o">=</span> <span class="mf">0.1</span>           <span class="c1"># fluid kinematic viscosity (mm^2/ms)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">rho_f</span> <span class="o">=</span> <span class="mf">1.26</span>        <span class="c1"># fluid density (mg/mm^3)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">u_phys</span> <span class="o">=</span> <span class="mf">0.6</span>        <span class="c1"># characteristic velocity (mm/ms)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">freq</span> <span class="o">=</span> <span class="mf">1e-3</span>         <span class="c1"># oscillation frequency (1/ms = 1 Hz)</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="c1"># Domain</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="n">x_length</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">L</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="n">y_length</span> <span class="o">=</span> <span class="mi">6</span><span class="o">*</span><span class="n">L</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="n">z_length</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">L</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="n">H</span> <span class="o">=</span> <span class="n">y_length</span>        <span class="c1"># channel height</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="c1"># Cilia layout</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="n">Ncilia</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">sep</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="mi">2</span>         <span class="c1"># spacing between filaments</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="c1"># LBM grid spacing</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="n">dx_LB</span> <span class="o">=</span> <span class="mf">0.625</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="c1"># BPM discretization</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="n">dx_BP</span> <span class="o">=</span> <span class="n">dx_LB</span> <span class="o">*</span> <span class="n">Gr</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="n">Nb</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">dx_BP</span><span class="p">))</span>      <span class="c1"># bonds per filament</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="n">Na</span> <span class="o">=</span> <span class="n">Nb</span> <span class="o">+</span> <span class="mi">1</span>                         <span class="c1"># atoms per filament</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="n">l0</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">Nb</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="c1"># Cross-section</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">D</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">4</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">D</span><span class="o">**</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">64</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">D</span><span class="o">**</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">32</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="c1"># =========================================================================</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="c1"># Write data file</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="c1"># =========================================================================</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="n">x_center</span> <span class="o">=</span> <span class="n">x_length</span> <span class="o">/</span> <span class="mi">2</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="n">z_center</span> <span class="o">=</span> <span class="n">z_length</span> <span class="o">/</span> <span class="mi">2</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="n">x_positions</span> <span class="o">=</span> <span class="n">x_center</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">Ncilia</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">sep</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">Ncilia</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">sep</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Ncilia</span><span class="p">)</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="n">Natoms</span> <span class="o">=</span> <span class="n">Ncilia</span> <span class="o">*</span> <span class="n">Na</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="n">Nbonds</span> <span class="o">=</span> <span class="n">Ncilia</span> <span class="o">*</span> <span class="n">Nb</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="c1"># atom_style hybrid molecular bpm/sphere</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="c1"># Columns: id type x y z molid diameter density</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;filaments.lam&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;LAMMPS DATA FILE</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Natoms</span><span class="si">}</span><span class="s1"> atoms</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Nbonds</span><span class="si">}</span><span class="s1"> bonds</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;3 atom types</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;1 bond types</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">0</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">x_length</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1"> xlo xhi</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">0</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">y_length</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1"> ylo yhi</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">0</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">z_length</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1"> zlo zhi</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Atoms</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>    <span class="n">atom_id</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Ncilia</span><span class="p">):</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Na</span><span class="p">):</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>            <span class="n">atom_id</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>            <span class="n">x</span> <span class="o">=</span> <span class="n">x_positions</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>            <span class="n">y</span> <span class="o">=</span> <span class="n">D</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">k</span> <span class="o">*</span> <span class="n">l0</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>            <span class="n">z</span> <span class="o">=</span> <span class="n">z_center</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>
+<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>                <span class="n">atype</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c1"># bottom (clamped)</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>            <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="n">Na</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>                <span class="n">atype</span> <span class="o">=</span> <span class="mi">3</span>       <span class="c1"># tip</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>            <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>                <span class="n">atype</span> <span class="o">=</span> <span class="mi">2</span>       <span class="c1"># interior</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>
+<a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%i</span><span class="s1"> </span><span class="si">%i</span><span class="s1"> </span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1"> </span><span class="si">%i</span><span class="s1"> </span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>                    <span class="p">(</span><span class="n">atom_id</span><span class="p">,</span> <span class="n">atype</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">rho</span><span class="p">))</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>
+<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Bonds</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>    <span class="n">bond_id</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Ncilia</span><span class="p">):</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a>        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nb</span><span class="p">):</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a>            <span class="n">bond_id</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a>            <span class="n">a1</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">Na</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a>            <span class="n">a2</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">Na</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">2</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a>            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%i</span><span class="s1"> 1 </span><span class="si">%i</span><span class="s1"> </span><span class="si">%i</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">bond_id</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">))</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a>
+<a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a>
+<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a><span class="c1"># =========================================================================</span>
+<a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a><span class="c1"># LBM parameter selection and stability analysis</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a><span class="c1">#</span>
+<a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a><span class="c1"># Call lbm_analysis() to print the full report.</span>
+<a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a><span class="c1"># This documents how the parameters in flow.in were chosen.</span>
+<a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a><span class="c1">#</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a><span class="c1"># Option A (Krueger textbook): fix dx_LB, choose U*</span>
+<a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a><span class="c1">#   U*   = u_phys * dt / dx_LB       =&gt;  dt = U* * dx_LB / u_phys</span>
+<a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a><span class="c1">#   nu*  = nu * dt / dx_LB^2</span>
+<a id="__codelineno-0-110" name="__codelineno-0-110" href="#__codelineno-0-110"></a><span class="c1">#   tau* = 0.5 + nu* / cs2           (cs2 = 1/3)</span>
+<a id="__codelineno-0-111" name="__codelineno-0-111" href="#__codelineno-0-111"></a><span class="c1">#   Ma   = U* / cs                   (cs = 1/sqrt(3))</span>
+<a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a><span class="c1">#</span>
+<a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a><span class="c1"># Subcycling (CoupLB md_per_lb):</span>
+<a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a><span class="c1">#   Multiple LAMMPS steps per LB step when dt_LB &gt; dt_critical for BPM</span>
+<a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a><span class="c1"># =========================================================================</span>
+<a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a>
+<a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a><span class="k">def</span><span class="w"> </span><span class="nf">lbm_analysis</span><span class="p">(</span><span class="n">U_star</span><span class="o">=</span><span class="mf">0.08</span><span class="p">):</span>
+<a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Print LBM parameter selection, stability analysis, and LAMMPS values.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a>
+<a id="__codelineno-0-120" name="__codelineno-0-120" href="#__codelineno-0-120"></a>    <span class="n">cs</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-0-121" name="__codelineno-0-121" href="#__codelineno-0-121"></a>    <span class="n">cs2</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span>
+<a id="__codelineno-0-122" name="__codelineno-0-122" href="#__codelineno-0-122"></a>    <span class="n">nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x_length</span> <span class="o">/</span> <span class="n">dx_LB</span><span class="p">)</span>
+<a id="__codelineno-0-123" name="__codelineno-0-123" href="#__codelineno-0-123"></a>    <span class="n">ny</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">y_length</span> <span class="o">/</span> <span class="n">dx_LB</span><span class="p">)</span>
+<a id="__codelineno-0-124" name="__codelineno-0-124" href="#__codelineno-0-124"></a>    <span class="n">nz</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">z_length</span> <span class="o">/</span> <span class="n">dx_LB</span><span class="p">)</span>
+<a id="__codelineno-0-125" name="__codelineno-0-125" href="#__codelineno-0-125"></a>
+<a id="__codelineno-0-126" name="__codelineno-0-126" href="#__codelineno-0-126"></a>    <span class="c1"># Derived LBM parameters</span>
+<a id="__codelineno-0-127" name="__codelineno-0-127" href="#__codelineno-0-127"></a>    <span class="n">dt_LB</span> <span class="o">=</span> <span class="n">U_star</span> <span class="o">*</span> <span class="n">dx_LB</span> <span class="o">/</span> <span class="n">u_phys</span>
+<a id="__codelineno-0-128" name="__codelineno-0-128" href="#__codelineno-0-128"></a>    <span class="n">nu_LB</span> <span class="o">=</span> <span class="n">nuf</span> <span class="o">*</span> <span class="n">dt_LB</span> <span class="o">/</span> <span class="n">dx_LB</span><span class="o">**</span><span class="mi">2</span>
+<a id="__codelineno-0-129" name="__codelineno-0-129" href="#__codelineno-0-129"></a>    <span class="n">tau</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">nu_LB</span> <span class="o">/</span> <span class="n">cs2</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130" href="#__codelineno-0-130"></a>    <span class="n">Ma</span> <span class="o">=</span> <span class="n">U_star</span> <span class="o">/</span> <span class="n">cs</span>
+<a id="__codelineno-0-131" name="__codelineno-0-131" href="#__codelineno-0-131"></a>
+<a id="__codelineno-0-132" name="__codelineno-0-132" href="#__codelineno-0-132"></a>    <span class="n">l_star</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">dx_LB</span>
+<a id="__codelineno-0-133" name="__codelineno-0-133" href="#__codelineno-0-133"></a>    <span class="n">Re_phys</span> <span class="o">=</span> <span class="n">u_phys</span> <span class="o">*</span> <span class="n">L</span> <span class="o">/</span> <span class="n">nuf</span>
+<a id="__codelineno-0-134" name="__codelineno-0-134" href="#__codelineno-0-134"></a>    <span class="n">Re_LB</span> <span class="o">=</span> <span class="n">U_star</span> <span class="o">*</span> <span class="n">l_star</span> <span class="o">/</span> <span class="n">nu_LB</span>
+<a id="__codelineno-0-135" name="__codelineno-0-135" href="#__codelineno-0-135"></a>
+<a id="__codelineno-0-136" name="__codelineno-0-136" href="#__codelineno-0-136"></a>    <span class="n">vel_scale</span> <span class="o">=</span> <span class="n">dx_LB</span> <span class="o">/</span> <span class="n">dt_LB</span>
+<a id="__codelineno-0-137" name="__codelineno-0-137" href="#__codelineno-0-137"></a>    <span class="n">force_scale</span> <span class="o">=</span> <span class="n">rho_f</span> <span class="o">*</span> <span class="n">dx_LB</span><span class="o">**</span><span class="mi">4</span> <span class="o">/</span> <span class="n">dt_LB</span><span class="o">**</span><span class="mi">2</span>
+<a id="__codelineno-0-138" name="__codelineno-0-138" href="#__codelineno-0-138"></a>
+<a id="__codelineno-0-139" name="__codelineno-0-139" href="#__codelineno-0-139"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Re = </span><span class="si">{</span><span class="n">Re_phys</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-140" name="__codelineno-0-140" href="#__codelineno-0-140"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">LBM grid:  </span><span class="si">{</span><span class="n">nx</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">ny</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">nz</span><span class="si">}</span><span class="s2">  (dx_LB = </span><span class="si">{</span><span class="n">dx_LB</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-141" name="__codelineno-0-141" href="#__codelineno-0-141"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BPM grid:  Nb = </span><span class="si">{</span><span class="n">Nb</span><span class="si">}</span><span class="s2">, Na = </span><span class="si">{</span><span class="n">Na</span><span class="si">}</span><span class="s2">, l0 = </span><span class="si">{</span><span class="n">l0</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">, Gr = </span><span class="si">{</span><span class="n">l0</span><span class="o">/</span><span class="n">dx_LB</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-142" name="__codelineno-0-142" href="#__codelineno-0-142"></a>
+<a id="__codelineno-0-143" name="__codelineno-0-143" href="#__codelineno-0-143"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-144" name="__codelineno-0-144" href="#__codelineno-0-144"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LATTICE BOLTZMANN PARAMETERS&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-145" name="__codelineno-0-145" href="#__codelineno-0-145"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-146" name="__codelineno-0-146" href="#__codelineno-0-146"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Chosen:  U* = </span><span class="si">{</span><span class="n">U_star</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-147" name="__codelineno-0-147" href="#__codelineno-0-147"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Derived:&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-148" name="__codelineno-0-148" href="#__codelineno-0-148"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    dt_LB  = </span><span class="si">{</span><span class="n">dt_LB</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-149" name="__codelineno-0-149" href="#__codelineno-0-149"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    nu*    = </span><span class="si">{</span><span class="n">nu_LB</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-150" name="__codelineno-0-150" href="#__codelineno-0-150"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    tau*   = </span><span class="si">{</span><span class="n">tau</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-151" name="__codelineno-0-151" href="#__codelineno-0-151"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Ma     = </span><span class="si">{</span><span class="n">Ma</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-152" name="__codelineno-0-152" href="#__codelineno-0-152"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    l*     = </span><span class="si">{</span><span class="n">l_star</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-153" name="__codelineno-0-153" href="#__codelineno-0-153"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Re check:  Re_phys = </span><span class="si">{</span><span class="n">Re_phys</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">   Re_LB = </span><span class="si">{</span><span class="n">Re_LB</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">   &quot;</span>
+<a id="__codelineno-0-154" name="__codelineno-0-154" href="#__codelineno-0-154"></a>          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;MATCH&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">Re_phys</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Re_LB</span><span class="p">)</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">Re_phys</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-15</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1e-6</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;MISMATCH&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-155" name="__codelineno-0-155" href="#__codelineno-0-155"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Conversion scales:&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-156" name="__codelineno-0-156" href="#__codelineno-0-156"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    vel_scale   = </span><span class="si">{</span><span class="n">vel_scale</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-157" name="__codelineno-0-157" href="#__codelineno-0-157"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    force_scale = </span><span class="si">{</span><span class="n">force_scale</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-158" name="__codelineno-0-158" href="#__codelineno-0-158"></a>
+<a id="__codelineno-0-159" name="__codelineno-0-159" href="#__codelineno-0-159"></a>    <span class="c1"># Body force amplitude (oscillatory Stokes flow)</span>
+<a id="__codelineno-0-160" name="__codelineno-0-160" href="#__codelineno-0-160"></a>    <span class="c1">#</span>
+<a id="__codelineno-0-161" name="__codelineno-0-161" href="#__codelineno-0-161"></a>    <span class="c1"># For g(t) = g0 sin(wt) between walls separated by H, the centerline</span>
+<a id="__codelineno-0-162" name="__codelineno-0-162" href="#__codelineno-0-162"></a>    <span class="c1"># velocity is u_max ~ g0/w in the thick-channel limit (H &gt;&gt; delta_s).</span>
+<a id="__codelineno-0-163" name="__codelineno-0-163" href="#__codelineno-0-163"></a>    <span class="c1"># Stokes layer: delta_s = sqrt(2*nu/w).  Here delta_s ~ 5.6 mm and</span>
+<a id="__codelineno-0-164" name="__codelineno-0-164" href="#__codelineno-0-164"></a>    <span class="c1"># H/2 = 30 mm, so the approximation is valid (error &lt; 1%).</span>
+<a id="__codelineno-0-165" name="__codelineno-0-165" href="#__codelineno-0-165"></a>    <span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span>
+<a id="__codelineno-0-166" name="__codelineno-0-166" href="#__codelineno-0-166"></a>    <span class="n">delta_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">nuf</span> <span class="o">/</span> <span class="n">omega</span><span class="p">)</span>
+<a id="__codelineno-0-167" name="__codelineno-0-167" href="#__codelineno-0-167"></a>    <span class="n">G0</span> <span class="o">=</span> <span class="n">u_phys</span> <span class="o">*</span> <span class="n">omega</span>
+<a id="__codelineno-0-168" name="__codelineno-0-168" href="#__codelineno-0-168"></a>
+<a id="__codelineno-0-169" name="__codelineno-0-169" href="#__codelineno-0-169"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-170" name="__codelineno-0-170" href="#__codelineno-0-170"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BODY FORCE AMPLITUDE (oscillatory Stokes flow)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-171" name="__codelineno-0-171" href="#__codelineno-0-171"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-172" name="__codelineno-0-172" href="#__codelineno-0-172"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  omega     = 2*pi*f = </span><span class="si">{</span><span class="n">omega</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-173" name="__codelineno-0-173" href="#__codelineno-0-173"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  delta_s   = sqrt(2*nu/omega) = </span><span class="si">{</span><span class="n">delta_s</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> mm&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-174" name="__codelineno-0-174" href="#__codelineno-0-174"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  H/(2*delta_s) = </span><span class="si">{</span><span class="n">H</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_s</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  (&gt;&gt; 1: thick-channel limit)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-175" name="__codelineno-0-175" href="#__codelineno-0-175"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  G0 = u_max * omega = </span><span class="si">{</span><span class="n">G0</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">  (mm/ms^2)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-176" name="__codelineno-0-176" href="#__codelineno-0-176"></a>
+<a id="__codelineno-0-177" name="__codelineno-0-177" href="#__codelineno-0-177"></a>    <span class="c1"># Stability analysis</span>
+<a id="__codelineno-0-178" name="__codelineno-0-178" href="#__codelineno-0-178"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-179" name="__codelineno-0-179" href="#__codelineno-0-179"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;STABILITY ANALYSIS&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-180" name="__codelineno-0-180" href="#__codelineno-0-180"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-181" name="__codelineno-0-181" href="#__codelineno-0-181"></a>
+<a id="__codelineno-0-182" name="__codelineno-0-182" href="#__codelineno-0-182"></a>    <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-0-183" name="__codelineno-0-183" href="#__codelineno-0-183"></a>
+<a id="__codelineno-0-184" name="__codelineno-0-184" href="#__codelineno-0-184"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  1. RELAXATION TIME:  tau* = </span><span class="si">{</span><span class="n">tau</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>
+<a id="__codelineno-0-185" name="__codelineno-0-185" href="#__codelineno-0-185"></a>    <span class="k">if</span> <span class="n">tau</span> <span class="o">&lt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+<a id="__codelineno-0-186" name="__codelineno-0-186" href="#__codelineno-0-186"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UNSTABLE&quot;</span><span class="p">);</span> <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-0-187" name="__codelineno-0-187" href="#__codelineno-0-187"></a>    <span class="k">elif</span> <span class="n">tau</span> <span class="o">&lt;</span> <span class="mf">0.55</span><span class="p">:</span>
+<a id="__codelineno-0-188" name="__codelineno-0-188" href="#__codelineno-0-188"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MARGINAL&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-189" name="__codelineno-0-189" href="#__codelineno-0-189"></a>    <span class="k">elif</span> <span class="n">tau</span> <span class="o">&gt;</span> <span class="mf">2.0</span><span class="p">:</span>
+<a id="__codelineno-0-190" name="__codelineno-0-190" href="#__codelineno-0-190"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HIGH (over-damped)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-191" name="__codelineno-0-191" href="#__codelineno-0-191"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-192" name="__codelineno-0-192" href="#__codelineno-0-192"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GOOD&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-193" name="__codelineno-0-193" href="#__codelineno-0-193"></a>
+<a id="__codelineno-0-194" name="__codelineno-0-194" href="#__codelineno-0-194"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  2. MACH NUMBER:     Ma   = </span><span class="si">{</span><span class="n">Ma</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>
+<a id="__codelineno-0-195" name="__codelineno-0-195" href="#__codelineno-0-195"></a>    <span class="k">if</span> <span class="n">Ma</span> <span class="o">&gt;</span> <span class="mf">0.3</span><span class="p">:</span>
+<a id="__codelineno-0-196" name="__codelineno-0-196" href="#__codelineno-0-196"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HIGH&quot;</span><span class="p">);</span> <span class="n">all_ok</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-0-197" name="__codelineno-0-197" href="#__codelineno-0-197"></a>    <span class="k">elif</span> <span class="n">Ma</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+<a id="__codelineno-0-198" name="__codelineno-0-198" href="#__codelineno-0-198"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCEPTABLE&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-199" name="__codelineno-0-199" href="#__codelineno-0-199"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-200" name="__codelineno-0-200" href="#__codelineno-0-200"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;EXCELLENT&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-201" name="__codelineno-0-201" href="#__codelineno-0-201"></a>
+<a id="__codelineno-0-202" name="__codelineno-0-202" href="#__codelineno-0-202"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  3. GRID RESOLUTION: l*   = </span><span class="si">{</span><span class="n">l_star</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;    &quot;</span><span class="p">)</span>
+<a id="__codelineno-0-203" name="__codelineno-0-203" href="#__codelineno-0-203"></a>    <span class="k">if</span> <span class="n">l_star</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-0-204" name="__codelineno-0-204" href="#__codelineno-0-204"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;COARSE&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-205" name="__codelineno-0-205" href="#__codelineno-0-205"></a>    <span class="k">elif</span> <span class="n">l_star</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+<a id="__codelineno-0-206" name="__codelineno-0-206" href="#__codelineno-0-206"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MODERATE&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-207" name="__codelineno-0-207" href="#__codelineno-0-207"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-208" name="__codelineno-0-208" href="#__codelineno-0-208"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GOOD&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-209" name="__codelineno-0-209" href="#__codelineno-0-209"></a>
+<a id="__codelineno-0-210" name="__codelineno-0-210" href="#__codelineno-0-210"></a>    <span class="c1"># Sensitivity: U*</span>
+<a id="__codelineno-0-211" name="__codelineno-0-211" href="#__codelineno-0-211"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  4. SENSITIVITY (varying U* at dx_LB = </span><span class="si">{</span><span class="n">dx_LB</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-212" name="__codelineno-0-212" href="#__codelineno-0-212"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="s1">&#39;U*&#39;</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;dt_LB&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;nu*&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;tau*&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Ma&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Status&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-213" name="__codelineno-0-213" href="#__codelineno-0-213"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">66</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-214" name="__codelineno-0-214" href="#__codelineno-0-214"></a>    <span class="k">for</span> <span class="n">U_t</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">]:</span>
+<a id="__codelineno-0-215" name="__codelineno-0-215" href="#__codelineno-0-215"></a>        <span class="n">dt_t</span> <span class="o">=</span> <span class="n">U_t</span> <span class="o">*</span> <span class="n">dx_LB</span> <span class="o">/</span> <span class="n">u_phys</span>
+<a id="__codelineno-0-216" name="__codelineno-0-216" href="#__codelineno-0-216"></a>        <span class="n">nu_t</span> <span class="o">=</span> <span class="n">nuf</span> <span class="o">*</span> <span class="n">dt_t</span> <span class="o">/</span> <span class="n">dx_LB</span><span class="o">**</span><span class="mi">2</span>
+<a id="__codelineno-0-217" name="__codelineno-0-217" href="#__codelineno-0-217"></a>        <span class="n">tau_t</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">nu_t</span>
+<a id="__codelineno-0-218" name="__codelineno-0-218" href="#__codelineno-0-218"></a>        <span class="n">Ma_t</span> <span class="o">=</span> <span class="n">U_t</span> <span class="o">/</span> <span class="n">cs</span>
+<a id="__codelineno-0-219" name="__codelineno-0-219" href="#__codelineno-0-219"></a>        <span class="n">st</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;UNSTABLE&quot;</span> <span class="k">if</span> <span class="n">tau_t</span> <span class="o">&lt;=</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="s2">&quot;marginal tau&quot;</span> <span class="k">if</span> <span class="n">tau_t</span> <span class="o">&lt;</span> <span class="mf">0.55</span>
+<a id="__codelineno-0-220" name="__codelineno-0-220" href="#__codelineno-0-220"></a>              <span class="k">else</span> <span class="s2">&quot;high Ma&quot;</span> <span class="k">if</span> <span class="n">Ma_t</span> <span class="o">&gt;</span> <span class="mf">0.3</span> <span class="k">else</span> <span class="s2">&quot;over-damped&quot;</span> <span class="k">if</span> <span class="n">tau_t</span> <span class="o">&gt;</span> <span class="mf">2.0</span> <span class="k">else</span> <span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-221" name="__codelineno-0-221" href="#__codelineno-0-221"></a>        <span class="n">mk</span> <span class="o">=</span> <span class="s2">&quot; &lt;--&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">U_t</span> <span class="o">-</span> <span class="n">U_star</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+<a id="__codelineno-0-222" name="__codelineno-0-222" href="#__codelineno-0-222"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="n">U_t</span><span class="si">:</span><span class="s2">&lt;8.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dt_t</span><span class="si">:</span><span class="s2">&lt;12.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">nu_t</span><span class="si">:</span><span class="s2">&lt;10.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tau_t</span><span class="si">:</span><span class="s2">&lt;10.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">Ma_t</span><span class="si">:</span><span class="s2">&lt;10.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">st</span><span class="si">}{</span><span class="n">mk</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-223" name="__codelineno-0-223" href="#__codelineno-0-223"></a>
+<a id="__codelineno-0-224" name="__codelineno-0-224" href="#__codelineno-0-224"></a>    <span class="c1"># Sensitivity: dx_LB</span>
+<a id="__codelineno-0-225" name="__codelineno-0-225" href="#__codelineno-0-225"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  5. SENSITIVITY (varying dx_LB at U* = </span><span class="si">{</span><span class="n">U_star</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-226" name="__codelineno-0-226" href="#__codelineno-0-226"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="s1">&#39;dx_LB&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;dt_LB&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;nu*&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;tau*&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;l*&#39;</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Nx&#39;</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Status&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-227" name="__codelineno-0-227" href="#__codelineno-0-227"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">72</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-228" name="__codelineno-0-228" href="#__codelineno-0-228"></a>    <span class="k">for</span> <span class="n">dx_t</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.3125</span><span class="p">,</span> <span class="mf">0.625</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]:</span>
+<a id="__codelineno-0-229" name="__codelineno-0-229" href="#__codelineno-0-229"></a>        <span class="n">dt_t</span> <span class="o">=</span> <span class="n">U_star</span> <span class="o">*</span> <span class="n">dx_t</span> <span class="o">/</span> <span class="n">u_phys</span>
+<a id="__codelineno-0-230" name="__codelineno-0-230" href="#__codelineno-0-230"></a>        <span class="n">nu_t</span> <span class="o">=</span> <span class="n">nuf</span> <span class="o">*</span> <span class="n">dt_t</span> <span class="o">/</span> <span class="n">dx_t</span><span class="o">**</span><span class="mi">2</span>
+<a id="__codelineno-0-231" name="__codelineno-0-231" href="#__codelineno-0-231"></a>        <span class="n">tau_t</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">nu_t</span>
+<a id="__codelineno-0-232" name="__codelineno-0-232" href="#__codelineno-0-232"></a>        <span class="n">l_t</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">dx_t</span>
+<a id="__codelineno-0-233" name="__codelineno-0-233" href="#__codelineno-0-233"></a>        <span class="n">nx_t</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x_length</span> <span class="o">/</span> <span class="n">dx_t</span><span class="p">)</span>
+<a id="__codelineno-0-234" name="__codelineno-0-234" href="#__codelineno-0-234"></a>        <span class="n">st</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;UNSTABLE&quot;</span> <span class="k">if</span> <span class="n">tau_t</span> <span class="o">&lt;=</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="s2">&quot;marginal tau&quot;</span> <span class="k">if</span> <span class="n">tau_t</span> <span class="o">&lt;</span> <span class="mf">0.55</span>
+<a id="__codelineno-0-235" name="__codelineno-0-235" href="#__codelineno-0-235"></a>              <span class="k">else</span> <span class="s2">&quot;over-damped&quot;</span> <span class="k">if</span> <span class="n">tau_t</span> <span class="o">&gt;</span> <span class="mf">2.0</span> <span class="k">else</span> <span class="s2">&quot;too coarse&quot;</span> <span class="k">if</span> <span class="n">l_t</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="s2">&quot;OK&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-236" name="__codelineno-0-236" href="#__codelineno-0-236"></a>        <span class="n">mk</span> <span class="o">=</span> <span class="s2">&quot; &lt;--&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dx_t</span> <span class="o">-</span> <span class="n">dx_LB</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+<a id="__codelineno-0-237" name="__codelineno-0-237" href="#__codelineno-0-237"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="n">dx_t</span><span class="si">:</span><span class="s2">&lt;10.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">dt_t</span><span class="si">:</span><span class="s2">&lt;12.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">nu_t</span><span class="si">:</span><span class="s2">&lt;10.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tau_t</span><span class="si">:</span><span class="s2">&lt;10.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">l_t</span><span class="si">:</span><span class="s2">&lt;8.1f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">nx_t</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">st</span><span class="si">}{</span><span class="n">mk</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-238" name="__codelineno-0-238" href="#__codelineno-0-238"></a>
+<a id="__codelineno-0-239" name="__codelineno-0-239" href="#__codelineno-0-239"></a>    <span class="c1"># Timestep synchronization</span>
+<a id="__codelineno-0-240" name="__codelineno-0-240" href="#__codelineno-0-240"></a>    <span class="n">Kr</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">A</span> <span class="o">/</span> <span class="n">l0</span>
+<a id="__codelineno-0-241" name="__codelineno-0-241" href="#__codelineno-0-241"></a>    <span class="n">Ks</span> <span class="o">=</span> <span class="mi">12</span> <span class="o">*</span> <span class="n">E</span> <span class="o">*</span> <span class="n">I</span> <span class="o">/</span> <span class="n">l0</span><span class="o">**</span><span class="mi">3</span>
+<a id="__codelineno-0-242" name="__codelineno-0-242" href="#__codelineno-0-242"></a>    <span class="n">Kt</span> <span class="o">=</span> <span class="n">G</span> <span class="o">*</span> <span class="n">J</span> <span class="o">/</span> <span class="n">l0</span>
+<a id="__codelineno-0-243" name="__codelineno-0-243" href="#__codelineno-0-243"></a>    <span class="n">Kb</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">I</span> <span class="o">/</span> <span class="n">l0</span>
+<a id="__codelineno-0-244" name="__codelineno-0-244" href="#__codelineno-0-244"></a>
+<a id="__codelineno-0-245" name="__codelineno-0-245" href="#__codelineno-0-245"></a>    <span class="n">m_seg</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">l0</span>
+<a id="__codelineno-0-246" name="__codelineno-0-246" href="#__codelineno-0-246"></a>    <span class="n">I_seg</span> <span class="o">=</span> <span class="n">m_seg</span> <span class="o">*</span> <span class="n">l0</span><span class="o">**</span><span class="mi">2</span>
+<a id="__codelineno-0-247" name="__codelineno-0-247" href="#__codelineno-0-247"></a>
+<a id="__codelineno-0-248" name="__codelineno-0-248" href="#__codelineno-0-248"></a>    <span class="n">omega_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Kr</span> <span class="o">/</span> <span class="n">m_seg</span><span class="p">)</span>
+<a id="__codelineno-0-249" name="__codelineno-0-249" href="#__codelineno-0-249"></a>    <span class="n">omega_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Ks</span> <span class="o">/</span> <span class="n">m_seg</span><span class="p">)</span>
+<a id="__codelineno-0-250" name="__codelineno-0-250" href="#__codelineno-0-250"></a>    <span class="n">omega_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Kt</span> <span class="o">/</span> <span class="n">I_seg</span><span class="p">)</span>
+<a id="__codelineno-0-251" name="__codelineno-0-251" href="#__codelineno-0-251"></a>    <span class="n">omega_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Kb</span> <span class="o">/</span> <span class="n">I_seg</span><span class="p">)</span>
+<a id="__codelineno-0-252" name="__codelineno-0-252" href="#__codelineno-0-252"></a>    <span class="n">omega_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">omega_r</span><span class="p">,</span> <span class="n">omega_s</span><span class="p">,</span> <span class="n">omega_t</span><span class="p">,</span> <span class="n">omega_b</span><span class="p">)</span>
+<a id="__codelineno-0-253" name="__codelineno-0-253" href="#__codelineno-0-253"></a>    <span class="n">f_max</span> <span class="o">=</span> <span class="n">omega_max</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<a id="__codelineno-0-254" name="__codelineno-0-254" href="#__codelineno-0-254"></a>
+<a id="__codelineno-0-255" name="__codelineno-0-255" href="#__codelineno-0-255"></a>    <span class="n">dt_crit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega_max</span>
+<a id="__codelineno-0-256" name="__codelineno-0-256" href="#__codelineno-0-256"></a>    <span class="n">dt_safe</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">/</span> <span class="n">f_max</span>
+<a id="__codelineno-0-257" name="__codelineno-0-257" href="#__codelineno-0-257"></a>
+<a id="__codelineno-0-258" name="__codelineno-0-258" href="#__codelineno-0-258"></a>    <span class="n">dt_lammps_target</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt_safe</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt_crit</span><span class="p">)</span>
+<a id="__codelineno-0-259" name="__codelineno-0-259" href="#__codelineno-0-259"></a>    <span class="n">lammps_per_lb</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">dt_LB</span> <span class="o">/</span> <span class="n">dt_lammps_target</span><span class="p">)))</span>
+<a id="__codelineno-0-260" name="__codelineno-0-260" href="#__codelineno-0-260"></a>    <span class="n">dt_lammps</span> <span class="o">=</span> <span class="n">dt_LB</span> <span class="o">/</span> <span class="n">lammps_per_lb</span>
+<a id="__codelineno-0-261" name="__codelineno-0-261" href="#__codelineno-0-261"></a>
+<a id="__codelineno-0-262" name="__codelineno-0-262" href="#__codelineno-0-262"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-263" name="__codelineno-0-263" href="#__codelineno-0-263"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TIMESTEP SYNCHRONIZATION (CoupLB md_per_lb subcycling)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-264" name="__codelineno-0-264" href="#__codelineno-0-264"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-265" name="__codelineno-0-265" href="#__codelineno-0-265"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Spring frequencies:&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-266" name="__codelineno-0-266" href="#__codelineno-0-266"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    omega_r = </span><span class="si">{</span><span class="n">omega_r</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  omega_s = </span><span class="si">{</span><span class="n">omega_s</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  &quot;</span>
+<a id="__codelineno-0-267" name="__codelineno-0-267" href="#__codelineno-0-267"></a>          <span class="sa">f</span><span class="s2">&quot;omega_t = </span><span class="si">{</span><span class="n">omega_t</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  omega_b = </span><span class="si">{</span><span class="n">omega_b</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-268" name="__codelineno-0-268" href="#__codelineno-0-268"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    omega_max = </span><span class="si">{</span><span class="n">omega_max</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  f_max = </span><span class="si">{</span><span class="n">f_max</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-269" name="__codelineno-0-269" href="#__codelineno-0-269"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Stability limits:&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-270" name="__codelineno-0-270" href="#__codelineno-0-270"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    dt_critical = </span><span class="si">{</span><span class="n">dt_crit</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">    dt_safe = </span><span class="si">{</span><span class="n">dt_safe</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-271" name="__codelineno-0-271" href="#__codelineno-0-271"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Timesteps:&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-272" name="__codelineno-0-272" href="#__codelineno-0-272"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    dt_LB     = </span><span class="si">{</span><span class="n">dt_LB</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-273" name="__codelineno-0-273" href="#__codelineno-0-273"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    dt_LAMMPS = </span><span class="si">{</span><span class="n">dt_lammps</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-274" name="__codelineno-0-274" href="#__codelineno-0-274"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    md_per_lb = </span><span class="si">{</span><span class="n">lammps_per_lb</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-275" name="__codelineno-0-275" href="#__codelineno-0-275"></a>
+<a id="__codelineno-0-276" name="__codelineno-0-276" href="#__codelineno-0-276"></a>    <span class="n">r_crit</span> <span class="o">=</span> <span class="n">dt_lammps</span> <span class="o">/</span> <span class="n">dt_crit</span>
+<a id="__codelineno-0-277" name="__codelineno-0-277" href="#__codelineno-0-277"></a>    <span class="n">r_safe</span> <span class="o">=</span> <span class="n">dt_lammps</span> <span class="o">/</span> <span class="n">dt_safe</span>
+<a id="__codelineno-0-278" name="__codelineno-0-278" href="#__codelineno-0-278"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Safety:  dt/dt_crit = </span><span class="si">{</span><span class="n">r_crit</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">   dt/dt_safe = </span><span class="si">{</span><span class="n">r_safe</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-279" name="__codelineno-0-279" href="#__codelineno-0-279"></a>
+<a id="__codelineno-0-280" name="__codelineno-0-280" href="#__codelineno-0-280"></a>    <span class="c1"># Simulation time</span>
+<a id="__codelineno-0-281" name="__codelineno-0-281" href="#__codelineno-0-281"></a>    <span class="n">T_osc</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">freq</span>                 <span class="c1"># period = 1000 ms = 1 s</span>
+<a id="__codelineno-0-282" name="__codelineno-0-282" href="#__codelineno-0-282"></a>    <span class="n">n_cycles</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-0-283" name="__codelineno-0-283" href="#__codelineno-0-283"></a>    <span class="n">sim_time</span> <span class="o">=</span> <span class="n">n_cycles</span> <span class="o">*</span> <span class="n">T_osc</span>        <span class="c1"># 10 s</span>
+<a id="__codelineno-0-284" name="__codelineno-0-284" href="#__codelineno-0-284"></a>    <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">sim_time</span> <span class="o">/</span> <span class="n">dt_lammps</span><span class="p">))</span>
+<a id="__codelineno-0-285" name="__codelineno-0-285" href="#__codelineno-0-285"></a>    <span class="n">n_lb</span> <span class="o">=</span> <span class="n">n_steps</span> <span class="o">//</span> <span class="n">lammps_per_lb</span>
+<a id="__codelineno-0-286" name="__codelineno-0-286" href="#__codelineno-0-286"></a>
+<a id="__codelineno-0-287" name="__codelineno-0-287" href="#__codelineno-0-287"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-288" name="__codelineno-0-288" href="#__codelineno-0-288"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SIMULATION TIME&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-289" name="__codelineno-0-289" href="#__codelineno-0-289"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-290" name="__codelineno-0-290" href="#__codelineno-0-290"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Target:     </span><span class="si">{</span><span class="n">sim_time</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> ms (</span><span class="si">{</span><span class="n">sim_time</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> s, </span><span class="si">{</span><span class="n">n_cycles</span><span class="si">}</span><span class="s2"> cycles at </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">T_osc</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> Hz)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-291" name="__codelineno-0-291" href="#__codelineno-0-291"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  LAMMPS:     </span><span class="si">{</span><span class="n">n_steps</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> steps @ dt = </span><span class="si">{</span><span class="n">dt_lammps</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-292" name="__codelineno-0-292" href="#__codelineno-0-292"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  LB:         </span><span class="si">{</span><span class="n">n_lb</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> steps @ dt = </span><span class="si">{</span><span class="n">dt_LB</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-293" name="__codelineno-0-293" href="#__codelineno-0-293"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  md_per_lb = </span><span class="si">{</span><span class="n">lammps_per_lb</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-294" name="__codelineno-0-294" href="#__codelineno-0-294"></a>
+<a id="__codelineno-0-295" name="__codelineno-0-295" href="#__codelineno-0-295"></a>    <span class="c1"># Summary</span>
+<a id="__codelineno-0-296" name="__codelineno-0-296" href="#__codelineno-0-296"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-297" name="__codelineno-0-297" href="#__codelineno-0-297"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VALUES FOR flow.in&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-298" name="__codelineno-0-298" href="#__codelineno-0-298"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">70</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-299" name="__codelineno-0-299" href="#__codelineno-0-299"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  timestep    </span><span class="si">{</span><span class="n">dt_lammps</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-300" name="__codelineno-0-300" href="#__codelineno-0-300"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  nuf         </span><span class="si">{</span><span class="n">nuf</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-301" name="__codelineno-0-301" href="#__codelineno-0-301"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  rhof        </span><span class="si">{</span><span class="n">rho_f</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-302" name="__codelineno-0-302" href="#__codelineno-0-302"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  G0          </span><span class="si">{</span><span class="n">G0</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-303" name="__codelineno-0-303" href="#__codelineno-0-303"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  freq        </span><span class="si">{</span><span class="n">freq</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-304" name="__codelineno-0-304" href="#__codelineno-0-304"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  grid        </span><span class="si">{</span><span class="n">nx</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">ny</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">nz</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-305" name="__codelineno-0-305" href="#__codelineno-0-305"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  md_per_lb   </span><span class="si">{</span><span class="n">lammps_per_lb</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-306" name="__codelineno-0-306" href="#__codelineno-0-306"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  run         </span><span class="si">{</span><span class="n">n_steps</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-307" name="__codelineno-0-307" href="#__codelineno-0-307"></a>
+<a id="__codelineno-0-308" name="__codelineno-0-308" href="#__codelineno-0-308"></a>    <span class="k">if</span> <span class="n">all_ok</span><span class="p">:</span>
+<a id="__codelineno-0-309" name="__codelineno-0-309" href="#__codelineno-0-309"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ALL CHECKS PASSED&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-310" name="__codelineno-0-310" href="#__codelineno-0-310"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-311" name="__codelineno-0-311" href="#__codelineno-0-311"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ISSUES DETECTED -- REVIEW ABOVE&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-312" name="__codelineno-0-312" href="#__codelineno-0-312"></a>
+<a id="__codelineno-0-313" name="__codelineno-0-313" href="#__codelineno-0-313"></a>
+<a id="__codelineno-0-314" name="__codelineno-0-314" href="#__codelineno-0-314"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<a id="__codelineno-0-315" name="__codelineno-0-315" href="#__codelineno-0-315"></a>    <span class="n">lbm_analysis</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<h3 id="lammps-input-script">LAMMPS input script</h3>
+<p>The input script is configured for 45 MPI ranks (<code>processors 5 3 3</code>).</p>
+<details class="code-file">
+<summary class="code-file-header">
+  <span class="filename">flow.in</span>
+  <a class="download-btn" href="flow.in" download onclick="event.stopPropagation()">⬇ Download</a>
+</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c"># Oscillatory channel flow with elastic filaments</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c"># Filament parameters (milli units: mm, ms, mg)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">variable    </span><span class="nv nv-Identifier">Nb</span><span class="w">      </span><span class="n">equal</span><span class="w"> </span><span class="m">16</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">variable    </span><span class="nv nv-Identifier">L</span><span class="w">       </span><span class="n">equal</span><span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">variable    </span><span class="nv nv-Identifier">d</span><span class="w">       </span><span class="n">equal</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">variable    </span><span class="nv nv-Identifier">l0</span><span class="w">      </span><span class="n">equal</span><span class="w"> </span><span class="nv">$(v_L/v_Nb)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c"># Cross-section properties</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">variable    </span><span class="nv nv-Identifier">A</span><span class="w">       </span><span class="n">equal</span><span class="w"> </span><span class="nv">(PI/4)</span><span class="o">*</span><span class="n">v_d</span><span class="o">^</span><span class="m">2</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">variable    </span><span class="nv nv-Identifier">I</span><span class="w">       </span><span class="n">equal</span><span class="w"> </span><span class="nv">(PI/64)</span><span class="o">*</span><span class="n">v_d</span><span class="o">^</span><span class="m">4</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">variable    </span><span class="nv nv-Identifier">J</span><span class="w">       </span><span class="n">equal</span><span class="w"> </span><span class="nv">(PI/32)</span><span class="o">*</span><span class="n">v_d</span><span class="o">^</span><span class="m">4</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c"># Elastic moduli (kPa)</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="k">variable    </span><span class="nv nv-Identifier">E</span><span class="w">       </span><span class="n">equal</span><span class="w"> </span><span class="m">1230</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="k">variable    </span><span class="nv nv-Identifier">G</span><span class="w">       </span><span class="n">equal</span><span class="w"> </span><span class="m">473</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="c"># Initialization</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="k">units</span><span class="w">           </span><span class="n">lj</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="k">dimension</span><span class="w">       </span><span class="m">3</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="k">processors</span><span class="w">      </span><span class="m">5</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">3</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="k">atom_style</span><span class="w">      </span><span class="n">hybrid</span><span class="w"> </span><span class="n">molecular</span><span class="w"> </span><span class="n">bpm</span><span class="o">/</span><span class="n">sphere</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="k">special_bonds</span><span class="w">   </span><span class="n">lj</span><span class="w"> </span><span class="m">0.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="n">coul</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span><span class="w"> </span><span class="m">1.0</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="k">newton</span><span class="w">          </span><span class="n">on</span><span class="w"> </span><span class="n">off</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="k">boundary</span><span class="w">        </span><span class="n">p</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">p</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="k">neighbor</span><span class="w">        </span><span class="m">0.5</span><span class="w"> </span><span class="n">bin</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="k">neigh_modify</span><span class="w">    </span><span class="n">delay</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="n">every</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="k">comm_modify</span><span class="w">     </span><span class="n">mode</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">cutoff</span><span class="w"> </span><span class="nv">$(2*v_l0)</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="n">yes</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="k">read_data</span><span class="w">       </span><span class="n">filaments.lam</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="c"># Groups</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="k">group           </span><span class="nv nv-Identifier">bottom</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="k">group           </span><span class="nv nv-Identifier">interior</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="k">group           </span><span class="nv nv-Identifier">tip</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="m">3</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="k">group           </span><span class="nv nv-Identifier">free</span><span class="w"> </span><span class="n">union</span><span class="w"> </span><span class="n">interior</span><span class="w"> </span><span class="n">tip</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="c"># Track the tip of the rightmost filament</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="k">variable        </span><span class="nv nv-Identifier">trackid</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">5</span><span class="o">*</span><span class="nv">(v_Nb+1)</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="k">group           </span><span class="nv nv-Identifier">track</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="nv">${trackid}</span>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="k">variable        </span><span class="nv nv-Identifier">xt</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">x[</span><span class="nv">${trackid}</span><span class="n">]</span>
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="k">variable        </span><span class="nv nv-Identifier">yt</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">y[</span><span class="nv">${trackid}</span><span class="n">]</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="k">variable        </span><span class="nv nv-Identifier">zt</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">z[</span><span class="nv">${trackid}</span><span class="n">]</span>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a><span class="c"># BPM bond style</span>
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="k">variable        </span><span class="nv nv-Identifier">Kr</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">v_E</span><span class="o">*</span><span class="n">v_A</span><span class="o">/</span><span class="n">v_l0</span>
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a><span class="k">variable        </span><span class="nv nv-Identifier">Ks</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">12</span><span class="o">*</span><span class="n">v_E</span><span class="o">*</span><span class="n">v_I</span><span class="o">/</span><span class="n">v_l0</span><span class="o">^</span><span class="m">3</span>
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="k">variable        </span><span class="nv nv-Identifier">Kt</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">v_G</span><span class="o">*</span><span class="n">v_J</span><span class="o">/</span><span class="n">v_l0</span>
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a><span class="k">variable        </span><span class="nv nv-Identifier">Kb</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">v_E</span><span class="o">*</span><span class="n">v_I</span><span class="o">/</span><span class="n">v_l0</span>
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a><span class="k">bond_style</span><span class="w">      </span><span class="n">bpm</span><span class="o">/</span><span class="n">rotational</span><span class="w"> </span><span class="n">smooth</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">break</span><span class="w"> </span><span class="n">no</span>
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a><span class="k">bond_coeff</span><span class="w">      </span><span class="m">1</span><span class="w"> </span><span class="nv">${Kr}</span><span class="w"> </span><span class="nv">${Ks}</span><span class="w"> </span><span class="nv">${Kt}</span><span class="w"> </span><span class="nv">${Kb}</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a><span class="w">                </span><span class="o">-</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a><span class="w">                </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a><span class="k">pair_style</span><span class="w">      </span><span class="n">zero</span><span class="w"> </span><span class="nv">$(2*v_l0)</span>
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a><span class="k">pair_coeff</span><span class="w">      </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">$(2*v_l0)</span>
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a><span class="c"># LBM parameters</span>
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a><span class="k">variable        </span><span class="nv nv-Identifier">nuf</span><span class="w">     </span><span class="n">equal</span><span class="w"> </span><span class="m">0.1</span>
+<a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a><span class="k">variable        </span><span class="nv nv-Identifier">rhof</span><span class="w">    </span><span class="n">equal</span><span class="w"> </span><span class="m">1.26</span>
+<a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>
+<a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a><span class="c"># Oscillating body force: g(t) = g0 sin(2 pi f t)</span>
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a><span class="k">variable        </span><span class="nv nv-Identifier">freq</span><span class="w">    </span><span class="n">equal</span><span class="w"> </span><span class="m">1e-3</span>
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a><span class="k">variable        </span><span class="nv nv-Identifier">g0</span><span class="w">      </span><span class="n">equal</span><span class="w"> </span><span class="m">3.8e-3</span>
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a><span class="k">variable        </span><span class="nv nv-Identifier">time</span><span class="w">    </span><span class="n">equal</span><span class="w"> </span><span class="n">step</span><span class="o">*</span><span class="n">v_timestep</span>
+<a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a><span class="k">variable        </span><span class="nv nv-Identifier">cyc</span><span class="w">     </span><span class="n">equal</span><span class="w"> </span><span class="n">v_freq</span><span class="o">*</span><span class="n">v_time</span>
+<a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a><span class="k">variable        </span><span class="nv nv-Identifier">gx_osc</span><span class="w">  </span><span class="n">equal</span><span class="w"> </span><span class="n">v_g0</span><span class="o">*</span><span class="n">sin</span><span class="nv">(2*PI*v_cyc)</span>
+<a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a>
+<a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a><span class="c"># Dynamics</span>
+<a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a><span class="c"># =========================================================================</span>
+<a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a>
+<a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a><span class="k">variable        </span><span class="nv nv-Identifier">timestep</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="m">0.003968</span>
+<a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a><span class="k">timestep</span><span class="w">        </span><span class="nv">${timestep}</span>
+<a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a>
+<a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a><span class="k">compute         </span><span class="nv nv-Identifier">mytemp</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">temp</span><span class="o">/</span><span class="n">sphere</span>
+<a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a><span class="k">compute         </span><span class="nv nv-Identifier">kerot</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">erotate</span><span class="o">/</span><span class="n">sphere</span>
+<a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a>
+<a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a><span class="c"># Initial tip position (reference for displacement)</span>
+<a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a><span class="k">variable        </span><span class="nv nv-Identifier">xt0</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">${xt}</span>
+<a id="__codelineno-1-100" name="__codelineno-1-100" href="#__codelineno-1-100"></a><span class="k">variable        </span><span class="nv nv-Identifier">yt0</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">${yt}</span>
+<a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a><span class="k">variable        </span><span class="nv nv-Identifier">zt0</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="nv">${zt}</span>
+<a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a>
+<a id="__codelineno-1-103" name="__codelineno-1-103" href="#__codelineno-1-103"></a><span class="k">variable        </span><span class="nv nv-Identifier">dxt</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">v_xt</span><span class="o">-</span><span class="n">v_xt0</span>
+<a id="__codelineno-1-104" name="__codelineno-1-104" href="#__codelineno-1-104"></a><span class="k">variable        </span><span class="nv nv-Identifier">dyt</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">v_yt</span><span class="o">-</span><span class="n">v_yt0</span>
+<a id="__codelineno-1-105" name="__codelineno-1-105" href="#__codelineno-1-105"></a><span class="k">variable        </span><span class="nv nv-Identifier">dzt</span><span class="w"> </span><span class="n">equal</span><span class="w"> </span><span class="n">v_zt</span><span class="o">-</span><span class="n">v_zt0</span>
+<a id="__codelineno-1-106" name="__codelineno-1-106" href="#__codelineno-1-106"></a>
+<a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a><span class="k">thermo</span><span class="w">          </span><span class="m">2100</span>
+<a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a><span class="k">thermo_style</span><span class="w">    </span><span class="n">custom</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">v_cyc</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="n">ke</span><span class="w"> </span><span class="n">c_kerot</span><span class="w"> </span><span class="n">pe</span><span class="w"> </span><span class="n">v_dxt</span><span class="w"> </span><span class="n">v_dyt</span><span class="w"> </span><span class="n">v_dzt</span>
+<a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a><span class="k">thermo_modify</span><span class="w">   </span><span class="n">temp</span><span class="w"> </span><span class="n">mytemp</span><span class="w"> </span><span class="n">norm</span><span class="w"> </span><span class="n">no</span>
+<a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a>
+<a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a><span class="k">fix             </span><span class="nv nv-Identifier">prnt</span><span class="w"> </span><span class="nv nv-Identifier">all</span><span class="w"> </span><span class="n">print</span><span class="w"> </span><span class="m">2100</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-112" name="__codelineno-1-112" href="#__codelineno-1-112"></a><span class="w">                </span><span class="s">&quot;${cyc} ${dxt} ${dyt} ${dzt}&quot;</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-113" name="__codelineno-1-113" href="#__codelineno-1-113"></a><span class="w">                </span><span class="n">file</span><span class="w"> </span><span class="n">right</span><span class="o">-</span><span class="n">tip.txt</span><span class="w"> </span><span class="n">screen</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-114" name="__codelineno-1-114" href="#__codelineno-1-114"></a><span class="w">                </span><span class="n">title</span><span class="w"> </span><span class="s">&quot;cycle dx dy dz&quot;</span>
+<a id="__codelineno-1-115" name="__codelineno-1-115" href="#__codelineno-1-115"></a>
+<a id="__codelineno-1-116" name="__codelineno-1-116" href="#__codelineno-1-116"></a><span class="k">fix             </span><span class="nv nv-Identifier">nve</span><span class="w"> </span><span class="nv nv-Identifier">free</span><span class="w"> </span><span class="n">nve</span><span class="o">/</span><span class="n">bpm</span><span class="o">/</span><span class="n">sphere</span>
+<a id="__codelineno-1-117" name="__codelineno-1-117" href="#__codelineno-1-117"></a>
+<a id="__codelineno-1-118" name="__codelineno-1-118" href="#__codelineno-1-118"></a><span class="k">fix             </span><span class="nv nv-Identifier">ibm</span><span class="w"> </span><span class="nv nv-Identifier">free</span><span class="w"> </span><span class="n">couplb</span><span class="w"> </span><span class="m">160</span><span class="w"> </span><span class="m">96</span><span class="w"> </span><span class="m">80</span><span class="w"> </span><span class="nv">${nuf}</span><span class="w"> </span><span class="nv">${rhof}</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-119" name="__codelineno-1-119" href="#__codelineno-1-119"></a><span class="w">                </span><span class="n">md_per_lb</span><span class="w"> </span><span class="m">21</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-120" name="__codelineno-1-120" href="#__codelineno-1-120"></a><span class="w">                </span><span class="n">wall_y</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-121" name="__codelineno-1-121" href="#__codelineno-1-121"></a><span class="w">                </span><span class="n">gravity</span><span class="w"> </span><span class="n">v_gx_osc</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-122" name="__codelineno-1-122" href="#__codelineno-1-122"></a><span class="w">                </span><span class="n">output</span><span class="w"> </span><span class="m">6300</span><span class="w"> </span><span class="n">fluid.dat</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-123" name="__codelineno-1-123" href="#__codelineno-1-123"></a><span class="w">                </span><span class="n">check_every</span><span class="w"> </span><span class="m">25200</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-124" name="__codelineno-1-124" href="#__codelineno-1-124"></a><span class="w">                </span><span class="n">vtk</span><span class="w"> </span><span class="m">6300</span><span class="w"> </span><span class="n">.</span><span class="o">/</span><span class="n">vtk</span><span class="o">/</span><span class="n">flow</span><span class="w"> </span><span class="o">&amp;</span>
+<a id="__codelineno-1-125" name="__codelineno-1-125" href="#__codelineno-1-125"></a><span class="w">                </span><span class="n">vtk_solid</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">mass</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="n">vz</span><span class="w"> </span><span class="n">fx</span><span class="w"> </span><span class="n">fy</span><span class="w"> </span><span class="n">fz</span>
+<a id="__codelineno-1-126" name="__codelineno-1-126" href="#__codelineno-1-126"></a>
+<a id="__codelineno-1-127" name="__codelineno-1-127" href="#__codelineno-1-127"></a><span class="k">run</span><span class="w">             </span><span class="m">2520000</span>
+</code></pre></div>
+</details>
+<h2 id="references">References</h2>
+<ul>
+<li>Pinelli, A., Omidyeganeh, M., Brücker, C., Revell, A., Sarkar, A., Alinovi, E. (2017). The PELskin project: part IV — control of bluff body wakes using hairy filaments. <em>Meccanica</em>, <strong>52</strong>, 1503–1514. <a href="https://doi.org/10.1007/s11012-016-0513-0">doi:10.1007/s11012-016-0513-0</a></li>
+<li>Agrawal, V., Kulachenko, A., Scapin, N., Tammisola, O., Brandt, L. (2024). An efficient isogeometric/finite-difference immersed boundary method for the fluid–structure interactions of slender flexible structures. <em>Comput. Methods Appl. Mech. Engrg.</em>, <strong>418</strong>, 116495. <a href="https://doi.org/10.1016/j.cma.2023.116495">doi:10.1016/j.cma.2023.116495</a></li>
+</ul>
+<hr />
+<p><a class="back-btn" href="../../#examples">← Back to Examples</a></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 18, 2026 01:51:19 UTC">May 18, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 18, 2026 01:51:19 UTC">May 18, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.expand", "navigation.path", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/download.js"></script>
+      
+    
+  </body>
+</html>

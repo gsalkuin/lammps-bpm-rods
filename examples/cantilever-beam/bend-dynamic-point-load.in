@@ -8,7 +8,7 @@ variable    N       equal NBONDS
 
 # Beam geometry
 variable    L       equal 10.
-variable    d0      equal $(v_L/v_N)
+variable    l0      equal $(v_L/v_N)
 variable    w       equal 0.5
 variable    h       equal 0.25
 
@@ -41,7 +41,7 @@ newton          on off
 
 neighbor        0.5 bin
 neigh_modify    once yes
-comm_modify     mode single cutoff $(2*v_d0) vel yes
+comm_modify     mode single cutoff $(2*v_l0) vel yes
 
 read_data       beam-${N}.lam
 
@@ -59,18 +59,18 @@ group           free subtract all left
 # BPM bond style
 # =========================================================================
 
-variable        Kr equal v_E*v_A/v_d0
-variable        Ks equal 12*v_E*v_I/v_d0^3
-variable        Kt equal v_G*v_J/v_d0
-variable        Kb equal v_E*v_I/v_d0
+variable        Kr equal v_E*v_A/v_l0
+variable        Ks equal 12*v_E*v_I/v_l0^3
+variable        Kt equal v_G*v_J/v_l0
+variable        Kb equal v_E*v_I/v_l0
 
 bond_style      bpm/rotational smooth no break no
 bond_coeff      1 ${Kr} ${Ks} ${Kt} ${Kb} &
                 -1 -1 -1 -1 &
                 0 0 0 0
 
-pair_style      zero $(2*v_d0)
-pair_coeff      * * $(2*v_d0)
+pair_style      zero $(2*v_l0)
+pair_coeff      * * $(2*v_l0)
 
 # =========================================================================
 # Simulation time and output

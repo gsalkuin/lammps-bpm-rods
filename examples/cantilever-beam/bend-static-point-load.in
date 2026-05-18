@@ -9,7 +9,7 @@ variable    N       equal NBONDS
 # Beam geometry (dimensionless)
 variable    L       equal 100
 variable    diam    equal 1
-variable    d0      equal $(v_L/v_N)
+variable    l0      equal $(v_L/v_N)
 
 # Cylindrical cross-section
 variable    A       equal (PI/4)*v_diam^2
@@ -40,7 +40,7 @@ newton          on off
 
 neighbor        0.5 bin
 neigh_modify    once yes
-comm_modify     mode single cutoff $(2*v_d0) vel yes
+comm_modify     mode single cutoff $(2*v_l0) vel yes
 
 read_data       beam-${N}.lam
 
@@ -60,18 +60,18 @@ group           free subtract all left
 # BPM bond style
 # =========================================================================
 
-variable        Kr equal v_E*v_A/v_d0
-variable        Ks equal 12*v_E*v_I/v_d0^3
-variable        Kt equal v_G*v_J/v_d0
-variable        Kb equal v_E*v_I/v_d0
+variable        Kr equal v_E*v_A/v_l0
+variable        Ks equal 12*v_E*v_I/v_l0^3
+variable        Kt equal v_G*v_J/v_l0
+variable        Kb equal v_E*v_I/v_l0
 
 bond_style      bpm/rotational smooth no break no
 bond_coeff      1 ${Kr} ${Ks} ${Kt} ${Kb} &
                 -1 -1 -1 -1 &
                 1e-2 1e-2 1e-2 1e-2
 
-pair_style      zero $(2*v_d0)
-pair_coeff      * * $(2*v_d0)
+pair_style      zero $(2*v_l0)
+pair_coeff      * * $(2*v_l0)
 
 # =========================================================================
 # Computes and output
@@ -136,7 +136,7 @@ run             50000000
 variable        Wextf_theo equal v_p*v_dymax
 
 variable        fddy atom "v_p/(v_E*v_I)*(v_L-x)"
-variable        Uf_atom atom "0.5*v_E*v_I*(v_fddy)^2*v_d0"
+variable        Uf_atom atom "0.5*v_E*v_I*(v_fddy)^2*v_l0"
 compute         Uf_discrete all reduce sum v_Uf_atom
 run             0
 

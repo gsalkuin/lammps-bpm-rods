@@ -9,7 +9,7 @@ variable    N       equal 258
 variable    L       equal 25.8
 variable    W       equal 1.21
 variable    H       equal 0.49
-variable    d0      equal $(v_L/v_N)
+variable    l0      equal $(v_L/v_N)
 
 # Rectangular cross-section
 variable    A       equal v_W*v_H
@@ -23,7 +23,7 @@ variable    G       equal "v_E/(2*(1+v_nu))"
 
 # Magnetization
 variable    M       equal 0.941
-variable    mu      equal v_M*v_d0*v_W*v_H
+variable    mu      equal v_M*v_l0*v_W*v_H
 
 # =========================================================================
 # Initialization
@@ -38,10 +38,10 @@ atom_style      hybrid bpm/sphere dipole
 special_bonds   lj 0.0 1.0 1.0 coul 1.0 1.0 1.0
 newton          on off
 
-neighbor        $(v_d0) bin
+neighbor        $(v_l0) bin
 neigh_modify    delay 0 every 10000
 atom_modify     sort 10000 1
-comm_modify     mode single cutoff $(2*v_d0) vel yes
+comm_modify     mode single cutoff $(2*v_l0) vel yes
 
 read_data       magnetic-beam-N${N}.lam
 
@@ -52,8 +52,8 @@ set             group all dipole 0 ${mu} 0
 # Groups
 # =========================================================================
 
-region          left block INF $(v_d0/2) INF INF INF INF
-region          right block $(v_L-v_d0/2) INF INF INF INF INF
+region          left block INF $(v_l0/2) INF INF INF INF
+region          right block $(v_L-v_l0/2) INF INF INF INF INF
 group           left region left
 group           right region right
 group           free subtract all left
@@ -62,18 +62,18 @@ group           free subtract all left
 # BPM bond style
 # =========================================================================
 
-variable        Kr equal v_E*v_A/v_d0
-variable        Ks equal 12*v_E*v_I/v_d0^3
-variable        Kt equal v_G*v_J/v_d0
-variable        Kb equal v_E*v_I/v_d0
+variable        Kr equal v_E*v_A/v_l0
+variable        Ks equal 12*v_E*v_I/v_l0^3
+variable        Kt equal v_G*v_J/v_l0
+variable        Kb equal v_E*v_I/v_l0
 
 bond_style      bpm/rotational smooth no break no
 bond_coeff      1 ${Kr} ${Ks} ${Kt} ${Kb} &
                 -1 -1 -1 -1 &
                 0.01 0.01 0.01 0.01
 
-pair_style      zero $(2*v_d0)
-pair_coeff      * * $(2*v_d0)
+pair_style      zero $(2*v_l0)
+pair_coeff      * * $(2*v_l0)
 
 # =========================================================================
 # Computes and output
