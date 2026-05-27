@@ -1,7 +1,5 @@
 # Bonded-Particle Model for Magneto-Elastic Rods
 
-<span style="color: red">⚠️ This site is still under development.</span>
-
 ## Overview
 
 Flexible rods undergoing large deformations are ubiquitous in science and engineering — from biological cilia and magnetic filaments to surgical catheters and soft robots. Simulating these systems requires a framework that naturally handles geometric nonlinearity, contact, and coupling to external fields and fluids. Bonded-particle models (BPMs) treat solids as collections of discrete particles connected by deformable bonds, and fit naturally within the discrete element method (DEM) — a general, scalable framework with modular multiphysics capabilities. Despite this versatility, BPMs remain underutilized for slender elastic rods. Here, we develop a co-rotational BPM formulation for slender rods, implement it in [LAMMPS](https://www.lammps.org/), and demonstrate its broad applicability across mechanics, magnetics, and fluid–structure interaction.
@@ -127,8 +125,8 @@ All examples are self-contained; the simplest is [Demo: Cantilever Beams](exampl
 <div class="title">FSI: Oscillatory Flow</div>
 <div class="desc">Elastic filaments in oscillatory channel flow</div>
 </a>
-<a href="examples/fsi-cilia-array/" class="example-card">
-<div class="title">FSI: Magnetic Cilia (under construction)</div>
+<a href="examples/fsi-magnetic-cilia-array/" class="example-card">
+<div class="title">FSI: Magnetic Cilia</div>
 <div class="desc">Fluid pumping by a cilia array with metachronal magnetization pattern</div>
 </a>
 </div>

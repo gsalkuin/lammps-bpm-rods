@@ -54,7 +54,7 @@ The data file generator includes a callable function `lbm_analysis()` that docum
 - **Atom style**: `atom_style hybrid molecular bpm/sphere`
 - **Boundary**: `p f p` — periodic in $x$ and $z$, fixed in $y$ (walls)
 - **Pair style**: `pair_style zero` — no contact
-- **FSI coupling**: `fix couplb` with `wall_y 1 1` for no-slip walls and `gravity v_gx_osc 0 0` for the oscillating body force
+- **FSI**: `fix couplb` with `wall_y 1 1` for no-slip walls and `gravity v_gx_osc 0 0` for the oscillating body force
 - **Time integration**: `fix nve/bpm/sphere`
 - **Damping**: no explicit damping — all dissipation comes from the fluid coupling
 

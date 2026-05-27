@@ -1,0 +1,133 @@
+# =========================================================================
+# Magnetically actuated 8x8 cilia array with antiplectic wave pattern
+# 
+# Replace LAMBDA with the desired wavelength before running.
+# =========================================================================
+
+# Cilium parameters (milli units: mm, ms, mg, mu0=4pi)
+variable    Nb      equal 10
+variable    L       equal 4
+variable    d       equal 0.8
+variable    l0      equal $(v_L/v_Nb)
+
+# Cross-section properties
+variable    A       equal (PI/4)*v_d^2
+variable    I       equal (PI/64)*v_d^4
+variable    J       equal (PI/32)*v_d^4
+
+# Elastic moduli (kPa)
+variable    E       equal 185
+variable    G       equal 61.6
+
+# =========================================================================
+# Initialization
+# =========================================================================
+
+units           lj
+dimension       3
+boundary        p f f
+processors      4 3 3
+
+atom_style      hybrid molecular bpm/sphere dipole
+special_bonds   lj 0.0 1.0 1.0 coul 1.0 1.0 1.0
+newton          on off
+
+neighbor        0.5 bin
+neigh_modify    delay 0 every 1
+comm_modify     mode single cutoff $(2*v_l0) vel yes
+
+read_data       magnetic-cilia-array-8x8-antiplectic-lambda-LAMBDA.lam
+
+# =========================================================================
+# Walls and tracers
+# =========================================================================
+
+# Confinement walls (y and z)
+region          walls block INF INF 0 36 0 45 side in
+
+# Tracer particles for fluid transport measurement
+region          dropzone block INF INF INF INF 1 44 side in
+create_atoms    3 random 1000 12345 dropzone overlap 1.0
+
+set             type 3 diameter 0.2
+set             type 3 density 1.
+
+# =========================================================================
+# Groups
+# =========================================================================
+
+group           floor molecule 1
+group           cilia molecule 2
+group           tracers type 3
+group           mobile union cilia tracers
+
+# =========================================================================
+# BPM bond style
+# =========================================================================
+
+variable        Kr equal v_E*v_A/v_l0
+variable        Ks equal 12*v_E*v_I/v_l0^3
+variable        Kt equal v_G*v_J/v_l0
+variable        Kb equal v_E*v_I/v_l0
+
+bond_style      bpm/rotational smooth no break no
+bond_coeff      1 ${Kr} ${Ks} ${Kt} ${Kb} &
+                -1 -1 -1 -1 &
+                0 0 0 0
+
+pair_style      zero $(2*v_l0)
+pair_coeff      * * 
+
+# =========================================================================
+# Magnetic actuation
+# =========================================================================
+
+# Rotating field in x-z plane
+variable        B       equal 8
+variable        omega   equal -30*PI/180/1000
+variable        phi     equal PI/2+v_omega*step*v_timestep
+variable        bx      equal v_B*cos(v_phi)
+variable        bz      equal v_B*sin(v_phi)
+
+# =========================================================================
+# Dynamics
+# =========================================================================
+
+variable        timestep equal 0.008
+timestep        ${timestep}
+
+variable        nstepspercycle equal "abs(2*PI/(v_omega*v_timestep))"
+variable        nsteps equal $(10*v_nstepspercycle)
+
+compute         mytemp all temp/sphere
+compute         erot all erotate/sphere
+variable        cycle equal step/v_nstepspercycle
+
+thermo          $(v_nstepspercycle/100)
+thermo_style    custom step temp ke c_erot pe v_cycle
+thermo_modify   temp mytemp norm no
+
+dump            1 all custom $(v_nstepspercycle/50) &
+                ./LAMBDA-array.dump &
+                id type mol x y z mass diameter mux muy muz
+
+dump            2 tracers custom ${nstepspercycle} &
+                ./LAMBDA-tracers.dump id xu yu zu
+dump_modify     2 sort id
+
+# =========================================================================
+# Fixes
+# =========================================================================
+
+fix             nve cilia nve/bpm/sphere update dipole
+fix             nvetr tracers nve
+fix             wall mobile wall/region walls harmonic 100 0 1.0
+fix             bext cilia efield v_bx 0 v_bz
+
+fix             lb mobile couplb 90 36 45 0.913 1.26 &
+                dx 1.0 &
+                wall_y 1 1 &
+                wall_z 1 3 &
+                vtk $(v_nstepspercycle/50) vtk/fluid
+
+run             ${nsteps}

@@ -64,6 +64,6 @@ nav:
       - Magnetic Beams: examples/magnetic-beam/index.md
       - Magnetic Helical Rods: examples/helical-rod/index.md
       - "FSI: Oscillatory Flow": examples/fsi-oscillatory-flow/index.md
-      - "FSI: Magnetic Cilia": examples/fsi-cilia-array/index.md
+      - "FSI: Magnetic Cilia": examples/fsi-magnetic-cilia-array/index.md
   - Miscellaneous:
       - Unit Systems: misc/unit-system.md
