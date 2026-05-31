@@ -1,6 +1,6 @@
 # Magnetic Helical Rods
 
-**Sec. 3.3** — Based on [Sano (2022)](https://doi.org/10.1088/1751-8121/ac4de2)
+**Based on [Sano (2022)](https://doi.org/10.1088/1751-8121/ac4de2)**
 
 A helical rod magnetized along its screw axis contracts under dipole–dipole interactions.
 An axial-gradient magnetic field stretches the helix, and quasi-static loading–unloading cycles produce mechanical hysteresis.

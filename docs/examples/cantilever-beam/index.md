@@ -4,7 +4,7 @@
     This demo assumes familiarity with running LAMMPS simulations (input scripts, data files, fixes, and computes). 
     It is aimed at users experienced with molecular dynamics who want to learn the BPM workflow for simulating elastic rods.
 
-This demo walks through the dynamic cantilever beam simulation in SI Sec. S3 based on the example from
+This demo walks through the dynamic cantilever beam simulation based on the example from
 [Le et al. 2011](https://doi.org/10.1007/s00466-011-0585-6).
 By the end, you'll learn:
 

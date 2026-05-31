@@ -1,6 +1,6 @@
 # Magnetic Beams
 
-**Sec. 3.2** — Based on [Yan et al. (2022)](https://doi.org/10.1016/j.ijsolstr.2021.111319)
+**Based on [Yan et al. (2022)](https://doi.org/10.1016/j.ijsolstr.2021.111319)**
 
 These scripts simulate the three configurations in Fig. 6(b) of our paper (cf. Fig. 9 in Yan et al.).
 For Fig. 6(a) (cf. Fig. 8(a)), add gravity along $+x$ to Configuration B1 using `fix gravity` (see the [twisting rod example](../twisting-rod/index.md)) and center the field at $(L/2, 0, 0)$ by replacing $x$ with $x-L/2$ in the potential.

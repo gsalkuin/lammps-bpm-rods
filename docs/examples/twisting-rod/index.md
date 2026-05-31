@@ -1,6 +1,6 @@
 # Extreme Twisting & Plectoneme Formation
 
-**Sec. 3.1** — Based on [Lazarus et al. (2013)](https://doi.org/10.1016/j.jmps.2013.04.002)
+**Based on [Lazarus et al. (2013)](https://doi.org/10.1016/j.jmps.2013.04.002)**
 
 A heavy elastic rod is axially compressed until it buckles under gravity, then twisted up to 9 full rotations.
 The simulation captures writhing instabilities and plectoneme formation with self-contact via Hertz–Mindlin interactions.

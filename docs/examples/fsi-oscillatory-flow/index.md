@@ -1,6 +1,6 @@
 # Oscillatory Channel Flow
 
-**Sec. 4.2** — Based on [Pinelli et al. (2017)](https://doi.org/10.1007/s11012-016-0513-0)
+**Based on [Pinelli et al. (2017)](https://doi.org/10.1007/s11012-016-0513-0)**
 
 Five elastic filaments are immersed in an oscillatory channel flow between no-slip walls.
 

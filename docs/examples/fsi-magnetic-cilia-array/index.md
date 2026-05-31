@@ -1,6 +1,6 @@
 # Magnetically Actuated Cilia Array
 
-**Sec. 4.3** — Based on [Gu et al. (2020)](https://doi.org/10.1038/s41467-020-16458-4)
+**Based on [Gu et al. (2020)](https://doi.org/10.1038/s41467-020-16458-4)**
 
 An $8 \times 8$ array of magnetically actuated cilia beats in an antiplectic metachronal wave pattern, pumping fluid along a channel.
 The cilia magnetization varies along the array, with cilia at the same $x$ position sharing the same dipole orientation, and the array is driven by a rotating external magnetic field.
