@@ -135,6 +135,7 @@ All examples are self-contained; the simplest is [Demo: Cantilever Beams](exampl
 ## Miscellaneous
 
 - **[Unit Systems](misc/unit-system.md)**
+- **[Other Examples](misc/other-examples.md)**
 
 ## License
 

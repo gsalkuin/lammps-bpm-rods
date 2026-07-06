@@ -66,3 +66,4 @@ nav:
       - "FSI: Magnetic Cilia": examples/fsi-magnetic-cilia-array/index.md
   - Miscellaneous:
       - Unit Systems: misc/unit-system.md
+      - Other Examples: misc/other-examples.md
