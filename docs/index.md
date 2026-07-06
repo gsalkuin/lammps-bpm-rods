@@ -43,9 +43,8 @@ Please also [cite LAMMPS](https://docs.lammps.org/Intro_citing.html) if you use 
 
 ### Build Instructions
 
-The model will be included in the **BPM** package starting from LAMMPS version **(TBD)**.
-In the meantime, it is available on the `develop` branch of the [LAMMPS repository](https://github.com/lammps/lammps/tree/develop)
-([PR#4945](https://github.com/lammps/lammps/pull/4945)).
+The model is included in the **BPM** package as of the LAMMPS **4 July 2026** feature release.
+See the [`bond_style bpm/rotational` documentation](https://docs.lammps.org/bond_bpm_rotational.html) for details.
 
 To run all the examples on this site, [build LAMMPS](https://docs.lammps.org/Build.html) with these packages:
 
